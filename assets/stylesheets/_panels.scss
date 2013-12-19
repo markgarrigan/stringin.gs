@@ -1,0 +1,128 @@
+@include media($bp-small) {
+	.panel {
+		background: $background;
+		position: absolute;
+		top: 0;
+		left: 100%;
+		min-width: 100%;
+		width: 100%;
+		height: 0px;
+		overflow: hidden;
+		z-index: 10;
+		opacity: 0;
+		white-space: nowrap;
+		@include transition (all .4s ease-in-out);
+		&.visible {
+			left: 0;
+			opacity: 1;
+			height: 100%;
+			overflow: auto;
+		}
+		h1 {
+			color: $dark_blue;
+			font-weight: 300;
+			font-size: 1rem;
+			text-align: center;
+			margin: 0;
+			margin-top: -1px;
+			background: $shade;
+			padding: .8rem;
+			border-bottom: 1px solid $shaded_border;
+			white-space: nowrap;
+			&.no-words {
+				background: transparent;
+				border-bottom: none;
+			}
+		}
+		.welcome {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 40em;
+			height: 20em;
+			margin-top: -10em;
+			margin-left: -20em;
+			text-align: center;
+			h1 {
+				background: transparent;
+				font-weight: 300;
+				font-size: 4em;
+				color: $dark_blue;
+				margin-top: 0;
+				margin-bottom: .3em;
+				padding: 0;
+				border-bottom: none;
+				text-align: center;
+			}
+			a {
+				background: $link_blue;
+				display: inline-block;
+				font-size: 1.5em;
+				color: white;
+				padding: .8em 3em;
+				text-decoration: none;
+			}
+		}
+		.cancel,
+		.save,
+		.add {
+			display: block;
+			position: absolute;
+			z-index: 100;
+			top: .9em;
+			left: 1rem;
+			color: $link_blue;
+			font-size: 1rem;
+			line-height: 1;
+			cursor: pointer;
+		}
+		.save,
+		.add {
+			left: auto;
+			right: 1rem;
+		}
+		.add {
+			top: .1em;
+			right: .6rem;
+			font-size: 3em;
+		}
+		.close {
+			display: none;
+		}
+	}
+}
+
+@include media($bp-large) {
+	.panel {
+		h1 {
+			color: $dark_blue;
+			font-weight: 300;
+			font-size: 2.5rem;
+			text-align: center;
+			margin: 0;
+			margin-top: -1px;
+			background: $shade;
+			padding: .8rem;
+			border-bottom: 1px solid $shaded_border;
+			.hamburger {
+				display: none;
+			}
+		}
+		.cancel,
+		.save {
+			top: 1.2em;
+			font-size: 1.5rem;
+		}
+		.close {
+			display: block;
+			position: absolute;
+			z-index: 100;
+			top: 0;
+			right: 1rem;
+			color: $dark_blue;
+			font-size: 3.5rem;
+			line-height: 4.4rem;
+			cursor: pointer;
+		}
+	}
+}

@@ -1,0 +1,33 @@
+@include media($bp-small) {
+	.app-content {
+		background: $background;
+		position: absolute;
+		left: 0px;
+		right: 0px;
+		overflow-y: auto;
+		overflow-x: hidden;
+		height: 100%;
+		min-width: 100%;
+		z-index: 5;
+		@include transition (all .3s ease-in-out);
+		&.moved {
+			left: 83%;
+			.close {
+				display: none;
+			}
+		}
+	}
+}
+
+@include media($bp-large) {
+	.app-content {
+		min-width: inherit;
+		left: 65px;
+		&.moved {
+			left: 200px;
+			.close {
+				display: block;
+			}
+		}
+	}
+}

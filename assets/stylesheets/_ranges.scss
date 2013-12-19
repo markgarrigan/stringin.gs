@@ -1,0 +1,67 @@
+@include media($bp-small) {
+
+	.range-label {
+		font-size: 1rem;
+		color: $darkest_background;
+		display: block;
+		padding: 1rem .6rem 0;
+	}
+
+	.range-container {
+		padding: 1rem .6rem;
+		position: relative;
+		@include clearfix;
+	}
+
+	/* slider root element */
+	.ui-slider-track {
+	    background: white;
+	    height: 3.6em;
+	    position: relative;
+	    cursor: pointer;
+	    width: 100%;
+	    margin-top: 0;
+	}
+
+	/* progress bar (enabled with progress: true) */
+	.ui-slider-bg {
+	    height: 3.6em;
+	    background-color: $green;
+	    border-right: 3px solid $darkest_background;
+	}
+
+	/* drag handle */
+	.ui-slider-handle {
+		background: $darkest_background;
+		height: 3.6em;
+		width: 3.6em;
+		top: 0em;
+		position: absolute;
+		display: none;
+		margin-top: 0;
+		margin-left: 0;
+		cursor: move;
+		z-index: 14;
+	}
+
+	/* For IE8 - See #6727 */
+	.ui-slider.ui-state-disabled .ui-slider-handle,
+	.ui-slider.ui-state-disabled .ui-slider-range {
+		filter: inherit;
+	}
+
+	/* the input field */
+	.range {
+		width: 4em;
+		text-align: right;
+		color: $dark_blue;
+		border: none;
+		background: transparent;
+		outline: none;
+	}
+
+}
+
+@include media($bp-large) {
+
+}

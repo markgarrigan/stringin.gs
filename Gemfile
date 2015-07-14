@@ -20,4 +20,5 @@ group :development do
  	gem 'sass'
 	gem 'bourbon'
 	gem 'neat'
+  gem 'thin'
 end

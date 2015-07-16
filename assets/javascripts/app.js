@@ -1,12 +1,1 @@
-//= require jquery.history
-//= require mousetrap.min
-//= require isEventSupported
-//= require jquery.mobile.custom.min
-//= require jquery.quicksearch
-//= require jquery.payment
-//= require jquery.order
-//= require picker
-//= require picker.date
-//= require handlebars
-//= require bindings
-//= require controllers
+var app = app || {};

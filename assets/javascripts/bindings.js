@@ -1,11 +1,4 @@
-var app = app || {};
-
 $(function(){
-
-	// Listen for hash on load
-	// if (window.location.hash) {
-
-	// }
 
 	$('.only-number').payment('restrictNumeric');
 
@@ -18,7 +11,6 @@ $(function(){
 	});
 
 	$('.ui-slider-handle').mousedown(function(e) {
-		console.log('lll');
 		e.stopPropagation();
 	});
 
@@ -35,10 +27,10 @@ $(function(){
 	Mousetrap.bind('t', function() { $('[data-key=t]').click(); });
 	Mousetrap.bind('esc', function() { app.hidePanel(); });
 
-    // Bind to StateChange Event
-    History.Adapter.bind(window,'statechange',function(){ // Note: We are using statechange instead of popstate
+  // Bind to StateChange Event
+  History.Adapter.bind(window,'statechange',function(){ // Note: We are using statechange instead of popstate
 		app.statechange();
-    });
+  });
 
 	$('[data-on-load]').each(function() {
 		var $this = $(this);
@@ -132,6 +124,17 @@ $(function(){
 		var options = $.extend({self : this,element : $this,iframe : $this.attr('target')},data,$this.data('options'));
 		methods = app.methods(data.onSubmit);
 		Queue(methods,options);
+	});
+
+	// Get a database reference to our posts
+	var ref = new Firebase("https://docs-examples.firebaseio.com/web/saving-data/fireblog/posts");
+
+	// Attach an asynchronous callback to read the data at our posts reference
+	app.fireRef.child("stringers").on("value", function(snapshot) {
+		app.stringers = app.makeArray(snapshot.val());
+		app.listStringers();
+	}, function (errorObject) {
+	  console.log("The read failed: " + errorObject.code);
 	});
 
 });

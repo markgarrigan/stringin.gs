@@ -753,9 +753,8 @@ body {
 @media screen and (min-width: 20em) {
   .app-nav {
     position: absolute;
-    z-index: 100;
     color: #c8c8c8;
-    background: #222222;
+    background: #222;
     width: 83%;
     left: 0;
     top: 0;
@@ -807,7 +806,7 @@ body {
         .app-nav ul li a {
           display: block;
           font-weight: 100;
-          color: #aaaaaa;
+          color: #aaa;
           padding: .6rem .8rem;
           text-decoration: none;
           -webkit-transition: background 0.1s ease-in-out;
@@ -837,13 +836,13 @@ body {
             transition: opacity 0.1s ease-in-out;
             margin-left: -9px; }
           .app-nav ul li a:active {
-            background: #111111; }
+            background: #111; }
         .app-nav ul li a.add {
           position: absolute;
           top: 0;
           right: 0;
           z-index: 2;
-          background: #82bd42;
+          background: #82BD42;
           color: white;
           padding: 0 .6rem;
           height: 100%;
@@ -854,9 +853,8 @@ body {
 @media screen and (min-width: 50em) {
   .app-nav {
     position: absolute;
-    z-index: 100;
     color: #c8c8c8;
-    background: #222222;
+    background: #222;
     width: 200px;
     left: 0;
     top: 0;
@@ -911,7 +909,7 @@ body {
         .app-nav ul li a {
           display: block;
           font-weight: 100;
-          color: #aaaaaa;
+          color: #aaa;
           padding: .6rem .8rem;
           text-decoration: none;
           -webkit-transition: background 0.1s ease-in-out;
@@ -943,8 +941,20 @@ body {
         .app-nav ul li a.add {
           margin-right: -4em; }
 
+  .touch .home span {
+    opacity: 1; }
+  .touch ul li a span {
+    opacity: 1; }
+  .touch ul li a strong {
+    border-color: transparent;
+    margin-left: -3px; }
+  .touch ul li a.add {
+    margin-right: 0; }
+  .touch h3 {
+    opacity: 1; }
+
   .no-touch ul li > a:hover {
-    background: #111111; }
+    background: #111; }
   .no-touch ul li:hover a.add {
     margin-right: 0; } }
 @media screen and (min-width: 20em) {
@@ -972,7 +982,10 @@ body {
     .app-content.moved {
       left: 200px; }
       .app-content.moved .close {
-        display: block; } }
+        display: block; }
+
+  .touch .app-content {
+    left: 200px; } }
 @media screen and (min-width: 20em) {
   .panel {
     background: #f6f6f6;
@@ -1001,9 +1014,9 @@ body {
       text-align: center;
       margin: 0;
       margin-top: -1px;
-      background: #eeeeee;
+      background: #EEE;
       padding: .8rem;
-      border-bottom: 1px solid #e1e1e1;
+      border-bottom: 1px solid #E1E1E1;
       white-space: nowrap; }
       .panel h1.no-words {
         background: transparent;
@@ -1028,7 +1041,7 @@ body {
         border-bottom: none;
         text-align: center; }
       .panel .welcome a {
-        background: #008ff5;
+        background: #008FF5;
         display: inline-block;
         font-size: 1.5em;
         color: white;
@@ -1042,7 +1055,7 @@ body {
       z-index: 100;
       top: .9em;
       left: 1rem;
-      color: #008ff5;
+      color: #008FF5;
       font-size: 1rem;
       line-height: 1;
       cursor: pointer; }
@@ -1060,13 +1073,13 @@ body {
   .panel h1 {
     color: #505050;
     font-weight: 300;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     text-align: center;
     margin: 0;
     margin-top: -1px;
-    background: #eeeeee;
-    padding: .8rem;
-    border-bottom: 1px solid #e1e1e1; }
+    background: #EEE;
+    padding: .5rem;
+    border-bottom: 1px solid #E1E1E1; }
     .panel h1 .hamburger {
       display: none; }
   .panel .cancel,
@@ -1092,7 +1105,7 @@ form .form-row {
   form .form-row:after {
     clear: both; }
   form .form-row.border {
-    border-bottom: 1px solid #e1e1e1; }
+    border-bottom: 1px solid #E1E1E1; }
 form input[type=number]::-webkit-inner-spin-button,
 form input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -1103,7 +1116,7 @@ form input[type="text"]:not(.range) {
   background: transparent;
   border: none;
   outline: none;
-  border-bottom: 1px solid #e1e1e1;
+  border-bottom: 1px solid #E1E1E1;
   display: block;
   width: 100%;
   box-sizing: border-box;
@@ -1116,12 +1129,12 @@ form input[type="text"]:not(.range) {
     display: block;
     width: 2rem;
     height: 2rem;
-    border: 1px solid #008ff5;
+    border: 1px solid #008FF5;
     border-radius: 50%;
     text-align: center;
     line-height: 2rem;
     font-size: 2rem;
-    color: #008ff5;
+    color: #008FF5;
     position: absolute;
     top: 50%;
     right: 1rem;
@@ -1141,7 +1154,7 @@ form .results {
   background: white; }
   .list p {
     position: relative;
-    border-bottom: 1px solid #e1e1e1;
+    border-bottom: 1px solid #E1E1E1;
     box-sizing: border-box;
     padding: 1rem .6rem;
     margin: 0;
@@ -1163,7 +1176,7 @@ form .results {
 @media screen and (min-width: 20em) {
   .range-label {
     font-size: 1rem;
-    color: #222222;
+    color: #222;
     display: block;
     padding: 1rem .6rem 0; }
 
@@ -1189,12 +1202,12 @@ form .results {
   /* progress bar (enabled with progress: true) */
   .ui-slider-bg {
     height: 3.6em;
-    background-color: #82bd42;
-    border-right: 3px solid #222222; }
+    background-color: #82BD42;
+    border-right: 3px solid #222; }
 
   /* drag handle */
   .ui-slider-handle {
-    background: #222222;
+    background: #222;
     height: 3.6em;
     width: 3.6em;
     top: 0em;

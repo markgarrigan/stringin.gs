@@ -16,12 +16,13 @@
 			<input type="text" value="" placeholder="Stringer Name" data-on-keyup="quickSearch" data-results=".stringer" data-on-blur="hideResults">
 			<!-- <span class="plus" data-on-click="showPanel" data-panel=".stringers">&plus;</span> -->
 			<div class="list stringer results">
-				<p data-on-click="makeValue">Mark Garrigan</p>
-				<p data-on-click="makeValue">Ron Yu</p>
-				<p data-on-click="makeValue">Nate Ferguson</p>
-				<p data-on-click="makeValue">Glynn Roberts</p>
 			</div>
 		</div>
+
+		<script id="pick-stringer-template" type="text/x-handlebars-template">
+			<p data-on-click="makeValue">{{full_name}}</p>
+		</script>
+
 		<div class="form-row">
 			<input type="text" value="" placeholder="Customer Name" data-on-keyup="quickSearch" data-results=".customer" data-on-blur="hideResults">
 			<!-- <span class="plus" data-on-click="showPanel" data-panel=".customers">&plus;</span> -->
@@ -46,7 +47,7 @@
 				<input type="number" name="main_tension" id="main_tension" value="" data-on-change="setSlider" data-slider="main_tension" class="range only-number">
 			</label>
 			<div class="range-container">
-				<input type="range" class="slider" value="58" min="1" max="100" step=".1" data-highlight="true" data-input="main_tension" />
+				<input type="range" class="slider" value="58" min="1" max="100" step=".5" data-highlight="true" data-input="main_tension" />
 			</div>
 		</div>
 		<div class="form-row">
@@ -64,7 +65,7 @@
 				<input type="number" name="cross_tension" id="cross_tension" value="" data-on-change="setSlider" data-slider="cross_tension" class="range only-number">
 			</label>
 			<div class="range-container">
-				<input type="range" class="slider" value="60" min="1" max="100" step=".1" data-highlight="true" data-input="cross_tension" />
+				<input type="range" class="slider" value="60" min="1" max="100" step=".5" data-highlight="true" data-input="cross_tension" />
 			</div>
 		</div>
 		<div class="form-row">
@@ -85,15 +86,12 @@
 	<%= partial :"_hamburger" %>
 	<h1>Stringers</h1>
 	<div class="list">
-		<p data-on-click="showPanel" data-panel=".stringer">Mark Garrigan</p>
-		<p data-on-click="showPanel" data-panel=".stringer">Ron Yu</p>
-		<p data-on-click="showPanel" data-panel=".stringer">Nate Ferguson</p>
 	</div>
 	<span class="add" data-on-click="showPanel" data-panel=".add-stringer">&plus;</span>
 </div>
 
 <script id="stringer-template" type="text/x-handlebars-template">
-	<p data-on-click="showPanel" data-panel=".stringer">{{firstName}} {{lastName}}</p>
+	<p data-on-click="showPanel" data-panel=".stringer">{{full_name}}</p>
 </script>
 
 <div class="panel stringer">
@@ -108,10 +106,10 @@
 	<h1>New Stringer</h1>
 	<form method="post" action="/stringer">
 		<div class="form-row">
-			<input type="text" value="" name="first_name" placeholder="First Name">
+			<input type="text" value="" name="new.stringer.fname" placeholder="First Name">
 		</div>
 		<div class="form-row">
-			<input type="text" value="" name="last_name" placeholder="Last Name">
+			<input type="text" value="" name="new.stringer.lname" placeholder="Last Name">
 		</div>
 		<span class="save" data-on-click="addStringer,showPanel" data-panel=".stringers">Save</span>
 	</form>

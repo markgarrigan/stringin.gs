@@ -1,5 +1,5 @@
 ###OSX###
- 
+
 .DS_Store
 
 # Thumbnails
@@ -14,7 +14,7 @@
 ###Ruby###
 
 vendor/ruby
- 
+
 *.gem
 *.rbc
 .bundle
@@ -40,4 +40,6 @@ log/*.log
 ###SASS###
 .sass-cache
 
-Guardfile
+.vagrant
+.sass-cache
+node_modules

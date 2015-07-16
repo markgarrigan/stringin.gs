@@ -7,14 +7,30 @@ var Queue = function(methods,options) {
 	}
 };
 $.extend(app,{
+	fireRef : new Firebase("https://stringings.firebaseio.com/"),
+	pickStringerTemplate : $("#pick-stringer-template").length ? Handlebars.compile($("#pick-stringer-template").html()) : null,
 	stringerTemplate : $("#stringer-template").length ? Handlebars.compile($("#stringer-template").html()) : null,
-	touchEnabled : isEventSupported('touchstart'),
+	touchEnabled : $('html').hasClass('touch'),
 	initHistory : function(options) {
 		History.options.disableSuid = true;
 		if(!History.getState().data.state) {
 			History.pushState({state:options.initial}, 'Stringin.gs', '');
 		}
 		app.statechange();
+	},
+	makeArray : function (obj) {
+		return $.map(obj, function(el,key) { el.id = key; return el; });
+	},
+	listStringers : function(options) {
+			var showList = $('.panel.stringers').find('.list').html(''),
+					pickList = $('.results.stringer').html(''),
+					$d = $.Deferred();
+			for (var i = 0; i < app.stringers.length; i++) {
+				showList.append(app.stringerTemplate(app.stringers[i]));
+				pickList.append(app.pickStringerTemplate(app.stringers[i]));
+			}
+			showList.children().order();
+			pickList.children().order();
 	},
 	statechange : function() {
 		$('.panel.visible').removeClass('visible');
@@ -32,6 +48,7 @@ $.extend(app,{
 		}
 	},
 	moveContentBack : function(options) {
+		console.log(app.touchEnabled);
 		var content = $('.app-content'),
 			moveContent = function() {
 				if (content.hasClass('moved')) {
@@ -40,7 +57,7 @@ $.extend(app,{
 				}
 			};
 		if (options.move) {
-			if (options.move == "touch" && app.touchEnabled) {
+			if (options.move === "touch" && app.touchEnabled) {
 				moveContent();
 			}
 		} else {
@@ -55,23 +72,28 @@ $.extend(app,{
 		History.back();
 	},
 	addStringer : function(options) {
-		var form = options.element.parents('form'),
-			panel = $(options.panel),
-			list = panel.find('.list'),
-			d = $.Deferred();
-	    var request = $.ajax({
-	          url: form.attr('action'),
-	          type: 'POST',
-	          data: form.serialize()
-	        });
-		request.done(function (data) {
-			form.find('input').val('');
-			list.append(app.stringerTemplate(data));
-			list.children().order();
-		  	d.resolve(data);
-		});
-		request.fail(d.reject);
-		return d.promise();
+		var $d = $.Deferred();
+		var stringer = {
+			ref : app.fireRef.child("stringers"),
+			fname : $('[name="new.stringer.fname"]'),
+			lname : $('[name="new.stringer.lname"]'),
+			onComplete : function(error) {
+				if (error) {
+					$d.reject();
+					console.log('Bad news bears.');
+				} else {
+					$d.resolve();
+					console.log('Sweet!');
+					stringer.fname.val('');
+					stringer.lname.val('');
+				}
+			}
+		};
+		stringer.ref.child(stringer.fname.val() + stringer.lname.val()).set({
+			date_added : Date.now(),
+			full_name : stringer.fname.val() + ' ' + stringer.lname.val()
+		}, stringer.onComplete);
+		return $d.promise();
 	},
 	quickSearch : function(options) {
 		if (!options.element.hasClass('searching')) {
@@ -92,8 +114,8 @@ $.extend(app,{
 		var hR = function() {
 			$(options.results + '.results').hide().data('input', '');
 			options.element.removeClass('searching');
-			delete options.element['quickSearch'];			
-		}
+			delete options.element.quickSearch;
+		};
 		if (now) {
 			hR();
 		} else {
@@ -104,7 +126,7 @@ $.extend(app,{
 	},
 	setSlider : function(options) {
 		$('[data-input=' + options.slider + ']').val(options.value).slider('refresh');
-		
+
 	},
 	makeValue : function(options) {
 		options.element.parent().data('input').val(options.element.text());

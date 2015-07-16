@@ -1,7 +1,6 @@
 @include media($bp-small) {
 	.app-nav {
 		position: absolute;
-		z-index: 100;
 		color: $darkest_text;
 		background: $darkest_background;
 		width: 83%;
@@ -106,7 +105,6 @@
 @include media($bp-large) {
 	.app-nav {
 		position: absolute;
-		z-index: 100;
 		color: $darkest_text;
 		background: $darkest_background;
 		width: 200px;
@@ -208,6 +206,24 @@
 					margin-right: -4em;
 				}
 			}
+		}
+	}
+	.touch {
+		.home span {
+			opacity: 1;
+		}
+		ul li a span {
+			opacity: 1;
+		}
+		ul li a strong {
+			border-color: transparent;
+			margin-left: -3px;
+		}
+		ul li a.add {
+			margin-right: 0;
+		}
+		h3 {
+			opacity: 1;
 		}
 	}
 	.no-touch {

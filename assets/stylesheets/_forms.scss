@@ -6,10 +6,10 @@ form {
 			border-bottom: 1px solid $shaded_border;
 		}
 	}
-	input[type=number]::-webkit-inner-spin-button, 
-	input[type=number]::-webkit-outer-spin-button { 
-		-webkit-appearance: none; 
-		margin: 0; 
+	input[type=number]::-webkit-inner-spin-button,
+	input[type=number]::-webkit-outer-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
 	}
 	input[type="range"] {
 		display: none;
@@ -45,14 +45,20 @@ form {
 		}
 	}
 	.results {
-		position: absolute;
+		position: fixed;
 		width: 100%;
+		top: 0;
+		bottom: 0;
 		background: white;
-		display: none;
-		z-index: 20;
+		z-index: 200;
+		overflow-x: hidden;
+		overflow-y: auto;
 		p {
 			background: white;
 			color: $darkest_text;
+		}
+		&.gonzo {
+			display: none;
 		}
 	}
 }

@@ -6,6 +6,18 @@
 	</div>
 </div>
 
+<div class="panel login">
+	<form>
+		<img class="bigboy" src="/images/stringings.png">
+		<a href="#" class="signin google" data-on-click="oAuthLogin" data-oauth="google">Sign in with Google</a>
+		<a href="#" class="signin twitter" data-on-click="oAuthLogin" data-oauth="twitter">Sign in with Twitter</a>
+	</form>
+	<!-- <form>
+		<input type="email" name="email">
+		<input type="password" name="password">
+	</form> -->
+</div>
+
 <div class="panel stringing">
 	<h1>New Stringing</h1>
 	<form>
@@ -13,9 +25,9 @@
 			<input type="text" value="" name="strung_on" placeholder="Strung On" class="datepicker">
 		</div>
 		<div class="form-row">
-			<input type="text" value="" placeholder="Stringer Name" data-on-keyup="quickSearch" data-results=".stringer" data-on-blur="hideResults">
+			<input type="text" value="" placeholder="Stringer Name" data-on-focus="positionResults" data-on-keyup="quickSearch" data-results=".stringer" data-on-blur="hideResults">
 			<!-- <span class="plus" data-on-click="showPanel" data-panel=".stringers">&plus;</span> -->
-			<div class="list stringer results">
+			<div class="list stringer results gonzo">
 			</div>
 		</div>
 
@@ -24,18 +36,18 @@
 		</script>
 
 		<div class="form-row">
-			<input type="text" value="" placeholder="Customer Name" data-on-keyup="quickSearch" data-results=".customer" data-on-blur="hideResults">
+			<input type="text" value="" placeholder="Customer Name" data-on-focus="positionResults" data-on-keyup="quickSearch" data-results=".customer" data-on-blur="hideResults">
 			<!-- <span class="plus" data-on-click="showPanel" data-panel=".customers">&plus;</span> -->
-			<div class="list customer results">
+			<div class="list customer results gonzo">
 				<p data-on-click="makeValue">Roger Federer</p>
 				<p data-on-click="makeValue">Mardy Fish</p>
 				<p data-on-click="makeValue">Jo Wilfred Tsonga</p>
 			</div>
 		</div>
 		<div class="form-row">
-			<input type="text" value="" placeholder="Racquet" data-on-keyup="quickSearch" data-results=".racquet" data-on-blur="hideResults">
+			<input type="text" value="" placeholder="Racquet" data-on-focus="positionResults" data-on-keyup="quickSearch" data-results=".racquet" data-on-blur="hideResults">
 			<!-- <span class="plus" data-on-click="showPanel" data-panel=".racquets">&plus;</span> -->
-			<div class="list racquet results">
+			<div class="list racquet results gonzo">
 				<p data-on-click="makeValue">Wilson Prostaff 6.1</p>
 				<p data-on-click="makeValue">Yonex RDS 100</p>
 				<p data-on-click="makeValue">Head Prestige</p>
@@ -51,9 +63,9 @@
 			</div>
 		</div>
 		<div class="form-row">
-			<input type="text" value="" placeholder="Main String" data-on-keyup="quickSearch" data-results=".m-string" data-on-blur="hideResults">
+			<input type="text" value="" placeholder="Main String" data-on-focus="positionResults" data-on-keyup="quickSearch" data-results=".m-string" data-on-blur="hideResults">
 			<!-- <span class="plus" data-on-click="showPanel" data-panel=".strings">&plus;</span> -->
-			<div class="list m-string results">
+			<div class="list m-string results gonzo">
 				<p data-on-click="makeValue">Luxilon ALU Power</p>
 				<p data-on-click="makeValue">Gamma Live Wire</p>
 				<p data-on-click="makeValue">Babolat VS Gut 1.25</p>
@@ -69,9 +81,9 @@
 			</div>
 		</div>
 		<div class="form-row">
-			<input type="text" value="" placeholder="Cross String" data-on-keyup="quickSearch" data-results=".c-string" data-on-blur="hideResults">
+			<input type="text" value="" placeholder="Cross String" data-on-focus="positionResults" data-on-keyup="quickSearch" data-results=".c-string" data-on-blur="hideResults">
 			<!-- <span class="plus" data-on-click="showPanel" data-panel=".strings">&plus;</span> -->
-			<div class="list c-string results">
+			<div class="list c-string results gonzo">
 				<p data-on-click="makeValue">Luxilon ALU Power</p>
 				<p data-on-click="makeValue">Gamma Live Wire</p>
 				<p data-on-click="makeValue">Babolat VS Gut 1.25</p>

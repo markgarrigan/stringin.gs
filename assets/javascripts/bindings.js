@@ -116,6 +116,14 @@ $(function(){
 		Queue(methods,options);
 	});
 
+	$('body').on('focus', '[data-on-focus]', function() {
+		var $this = $(this);
+		var data = $this.data();
+		var options = $.extend({el : this, element : $this, value : $this.val()},data,data.options);
+		var methods = app.methods(data.onFocus);
+		Queue(methods,options);
+	});
+
 	$('body').on('submit', '[data-on-submit]', function(e) {
 		e.preventDefault();
 		var $this = $(this);
@@ -126,15 +134,11 @@ $(function(){
 		Queue(methods,options);
 	});
 
-	// Get a database reference to our posts
-	var ref = new Firebase("https://docs-examples.firebaseio.com/web/saving-data/fireblog/posts");
-
-	// Attach an asynchronous callback to read the data at our posts reference
-	app.fireRef.child("stringers").on("value", function(snapshot) {
-		app.stringers = app.makeArray(snapshot.val());
-		app.listStringers();
-	}, function (errorObject) {
-	  console.log("The read failed: " + errorObject.code);
-	});
+	// app.fireRef.child("stringers").on("value", function(snapshot) {
+	// 	app.stringers = app.makeArray(snapshot.val());
+	// 	app.listStringers();
+	// }, function (errorObject) {
+	//   console.log("The read failed: " + errorObject.code);
+	// });
 
 });

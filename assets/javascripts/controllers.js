@@ -11,26 +11,29 @@ $.extend(app,{
 	pickStringerTemplate : $("#pick-stringer-template").length ? Handlebars.compile($("#pick-stringer-template").html()) : null,
 	stringerTemplate : $("#stringer-template").length ? Handlebars.compile($("#stringer-template").html()) : null,
 	touchEnabled : $('html').hasClass('touch'),
-	initHistory : function(options) {
-		History.options.disableSuid = true;
-		if(!History.getState().data.state) {
-			History.pushState({state:options.initial}, 'Stringin.gs', '');
-		}
-		app.statechange();
+	auth : function() {
+		return app.fireRef.getAuth();
 	},
-	makeArray : function (obj) {
-		return $.map(obj, function(el,key) { el.id = key; return el; });
-	},
-	listStringers : function(options) {
-			var showList = $('.panel.stringers').find('.list').html(''),
-					pickList = $('.results.stringer').html(''),
-					$d = $.Deferred();
-			for (var i = 0; i < app.stringers.length; i++) {
-				showList.append(app.stringerTemplate(app.stringers[i]));
-				pickList.append(app.pickStringerTemplate(app.stringers[i]));
+	oAuthLogin : function(options) {
+		app.fireRef.authWithOAuthRedirect(options.oauth, function(error, authData) {
+			if (error) {
+				console.log("Login Failed!", error);
 			}
-			showList.children().order();
-			pickList.children().order();
+		});
+	},
+	initHistory : function(options) {
+		app.fireRef.onAuth(function(authData) {
+		  if (authData) {
+				History.options.disableSuid = true;
+				if(!History.getState().data.state) {
+					History.pushState({state:options.initial}, 'Stringin.gs', '');
+				} else {
+					app.statechange();
+				}
+		  } else {
+		    $('.panel.login').addClass('visible').scrollTop(0);
+		  }
+		});
 	},
 	statechange : function() {
 		$('.panel.visible').removeClass('visible');
@@ -48,7 +51,6 @@ $.extend(app,{
 		}
 	},
 	moveContentBack : function(options) {
-		console.log(app.touchEnabled);
 		var content = $('.app-content'),
 			moveContent = function() {
 				if (content.hasClass('moved')) {
@@ -70,6 +72,20 @@ $.extend(app,{
 	},
 	hidePanel : function(options) {
 		History.back();
+	},
+	makeArray : function (obj) {
+		return $.map(obj, function(el,key) { el.id = key; return el; });
+	},
+	listStringers : function(options) {
+			var showList = $('.panel.stringers').find('.list').html(''),
+					pickList = $('.results.stringer').html(''),
+					$d = $.Deferred();
+			for (var i = 0; i < app.stringers.length; i++) {
+				showList.append(app.stringerTemplate(app.stringers[i]));
+				pickList.append(app.pickStringerTemplate(app.stringers[i]));
+			}
+			showList.children().order();
+			pickList.children().order();
 	},
 	addStringer : function(options) {
 		var $d = $.Deferred();
@@ -98,7 +114,7 @@ $.extend(app,{
 	quickSearch : function(options) {
 		if (!options.element.hasClass('searching')) {
 			if (options.value.length > 1) {
-				$(options.results + '.results').show().data('input', options.element);
+				app.showResults(options);
 				options.element.addClass('searching');
 				options.element.quicksearch(options.results + '.results p', {
 
@@ -109,10 +125,33 @@ $.extend(app,{
 			app.hideResults(options,true);
 		}
 	},
+	positionResults : function(options) {
+		var halfWinHeight = window.outerHeight/2,
+				formRow = options.element.parent(),
+				formRowTop = formRow.position().top,
+				formRowBottom = formRowTop + formRow.outerHeight(true),
+				results = $(options.results + '.results'),
+				resultsTop = 0,
+				resultsBottom = Number(results.css('bottom').replace('px', ''));
+		if (formRowBottom < halfWinHeight) {
+			resultsTop = Math.ceil(formRowBottom);
+		} else {
+			resultsBottom = Math.floor(window.outerHeight - formRowTop) + 1;
+		}
+		$(options.results + '.results').css({
+			top : resultsTop,
+			bottom : resultsBottom
+		});
+	},
+	showResults : function(options) {
+		options.element.parents('.panel').addClass('no-scroll');
+		$(options.results + '.results').removeClass('gonzo').data('input', options.element);
+	},
 	hideResults : function(options,now) {
 		now = typeof now !== 'undefined' ? now : false;
 		var hR = function() {
-			$(options.results + '.results').hide().data('input', '');
+			options.element.parents('.panel').removeClass('no-scroll');
+			$(options.results + '.results').addClass('gonzo').data('input', '');
 			options.element.removeClass('searching');
 			delete options.element.quickSearch;
 		};
@@ -162,6 +201,9 @@ $.extend(app,{
 		} else {
 			$(options.type).children().removeClass('notit').removeClass('it');
 		}
+	},
+	logout : function() {
+		app.fireRef.unauth();
 	},
 	waitHide : function(options) {
 		app.wait(5000).then(function() {

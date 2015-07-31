@@ -1,34 +1,23 @@
-@include media($bp-small) {
+.hamburger {
+	background: transparent;
+	text-align: center;
+	letter-spacing: -.03em;
+	cursor: pointer;
+}
+
+.single {
 	.hamburger {
-		display: inline-block;
-		position: absolute;
-		top: .1em;
-		left: 0em;
-		width: 2.1em;
-		height: 1.5em;
-		z-index: 12;
-		background: transparent;
-		font-size: 2.2em;
-		line-height: 1.5em;
-		text-align: center;
-		letter-spacing: -.03em;
-		cursor: pointer;
-		span:nth-child(1) {
-			border-top: .3rem solid $dark_blue;
-			padding-top: .2rem;
-			border-bottom: .3rem solid $dark_blue;
-			display: block;
-			margin-bottom: .2rem;
-		}
-		span:nth-child(2) {
-			border-bottom: .3rem solid $dark_blue;
-			display: block;
-		}
+		padding: 0 10px;
+		width: 3rem;
+		height: 3rem;
+		line-height: 3rem;
 	}
 }
 
-@include media($bp-large) {
-	.hamburger {
-		display: none;
+.no-touch {
+	@include media($bp-large) {
+		.hamburger {
+			display: none;
+		}
 	}
 }

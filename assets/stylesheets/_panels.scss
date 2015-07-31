@@ -1,132 +1,147 @@
-@include media($bp-small) {
-	.panel {
-		background: $background;
-		position: absolute;
-		top: 0;
-		left: 100%;
-		min-width: 100%;
-		width: 100%;
-		height: 0px;
-		overflow: hidden;
-		z-index: 10;
-		opacity: 0;
-		white-space: nowrap;
-		@include transition (all .4s ease-in-out);
-		&.visible {
-			left: 0;
-			opacity: 1;
-			height: 100%;
-			overflow-x: hidden;
-			overflow-y: auto;
-			&.no-scroll {
-				overflow-y: hidden;
+.panel {
+	@include align-items(stretch);
+	@include display(flex);
+	@include flex-direction(column);
+	@include justify-content(flex-start);
+	min-height: 100%;
+	max-height: 100%;
+	background: $background;
+	opacity: 0;
+	z-index: 10;
+	position: absolute;
+	width: 100%;
+	@include transform(translate(100%,0));
+	@include transition (all .4s ease-in-out);
+	.flexhead {
+		@include flex(1);
+		@include display(flex);
+		@include justify-content(flex-start);
+		@include align-items(stretch);
+		@include flex-direction(column);
+		color: $dark_blue;
+		font-weight: 300;
+		font-size: 1rem;
+		text-align: center;
+		margin: 0;
+		min-height: 6rem;
+		height: 6rem;
+		max-height: 6rem;
+		background: white;
+		border-bottom: 1px solid $shaded_border;
+		* {
+			margin: 0;
+		}
+		.toptop {
+			@include flex(1);
+			@include display(flex);
+			@include align-items(center);
+			@include justify-content(space-between);
+			* {
+				width: 3rem;
+				height: 3rem;
+				max-height: 3rem;
+				max-width: 3rem;
+				text-align: center;
+				line-height: 3rem;
+				@include flex(1);
+				display: block;
+				&:last-child:not(:first-child) {
+					font-size: .8rem;
+				}
 			}
 		}
 		h1 {
-			color: $dark_blue;
-			font-weight: 300;
-			font-size: 1rem;
-			text-align: center;
-			margin: 0;
-			margin-top: -1px;
-			background: $shade;
-			padding: .8rem;
-			border-bottom: 1px solid $shaded_border;
+			@include flex(1);
+			text-align: left;
 			white-space: nowrap;
-			&.no-words {
-				background: transparent;
-				border-bottom: none;
+			text-overflow: ellipsis;
+			font-weight: 100;
+			font-size: 1.6rem;
+			padding: 0 .5rem;
+			@include align-self(center);
+		}
+		.text-right {
+			text-align: right;
+		}
+		&.no-words {
+			background: transparent;
+			border-bottom: none;
+		}
+		&.single {
+			@include align-items(left);
+			& > * {
+				&:first-child {
+					@include flex(none);
+				}
 			}
-		}
-		.welcome {
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			width: 100%;
-			height: 20em;
-			text-align: center;
-			max-width: 100%;
-			@include transform(translate(-50%,-50%));
-			h1 {
-				background: transparent;
-				font-weight: 300;
-				font-size: 4em;
-				color: $dark_blue;
-				margin-top: 0;
-				margin-bottom: .3em;
-				padding: 0;
-				border-bottom: none;
-				text-align: center;
-			}
-			a {
-				background: $link_blue;
-				display: inline-block;
-				font-size: 1.5em;
-				color: white;
-				padding: .8em 3em;
-				text-decoration: none;
-			}
-		}
-		.cancel,
-		.save,
-		.add {
-			display: block;
-			position: absolute;
-			z-index: 100;
-			top: .9em;
-			left: 1rem;
-			color: $link_blue;
-			font-size: 1rem;
-			line-height: 1;
-			cursor: pointer;
-		}
-		.save,
-		.add {
-			left: auto;
-			right: 1rem;
-		}
-		.add {
-			top: .1em;
-			right: .6rem;
-			font-size: 3em;
-		}
-		.close {
-			display: none;
 		}
 	}
-}
-
-@include media($bp-large) {
-	.panel {
-		h1 {
-			color: $dark_blue;
-			font-weight: 300;
-			font-size: 1.5rem;
-			text-align: center;
-			margin: 0;
-			margin-top: -1px;
-			background: $shade;
-			padding: .5rem;
-			border-bottom: 1px solid $shaded_border;
-			.hamburger {
-				display: none;
+	.flexbody {
+		@include flex(1);
+		overflow: hidden;
+		@include align-items(stretch);
+		@include align-content(stretch);
+		@include display(flex);
+		@include flex-direction(column);
+		@include justify-content(flex-start);
+		&.align-center {
+			@include align-items(center);
+			@include align-content(center);
+			@include flex-direction(row);
+			@include justify-content(center);
+			@include display(flex);
+			& > * {
+				@include flex(1);
+				&:first-child {
+					@include transform(translate(0,-50%));
+				}
 			}
 		}
-		.cancel,
-		.save {
-			top: 1.2em;
-			font-size: 1.5rem;
+		.details {
+			@include display(flex);
+			@include flex(1);
 		}
-		.close {
-			display: block;
-			position: absolute;
-			z-index: 100;
-			top: 0;
-			right: 1rem;
-			color: $dark_blue;
-			font-size: 3.5rem;
-			line-height: 4.4rem;
-			cursor: pointer;
+		.bottom-nav {
+			@include display(flex);
+			@include flex(1);
+			@include align-self(flex-end);
+			width: 100%;
+			max-height: 3rem;
+			height: 3rem;
+			min-height: 3rem;
+			background: $link_blue;
+			color: white;
+			span {
+				width: 3rem;
+			  height: 3rem;
+			  line-height: 3rem;
+			  text-align: center;
+			  display: inline-block;
+			  margin: 0 auto;
+				img {
+					width: 50%;
+					display: inline-block;
+					vertical-align: middle;
+				}
+			}
+		}
+	}
+	&.visible {
+		opacity: 1;
+		@include transform(translate(0,0));
+	}
+	&.loading {
+		z-index: 300;
+		.loader {
+			text-align: center;
+			font-size: 1rem;
+			span:first-child {
+				margin-left: 10px;
+				margin-right: 3px;
+			}
+			span:last-child {
+				margin-left: 3px;
+			}
 		}
 	}
 }

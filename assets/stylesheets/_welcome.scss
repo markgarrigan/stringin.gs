@@ -1,0 +1,22 @@
+.welcome {
+  text-align: center;
+  h1 {
+    background: transparent;
+    font-weight: 300;
+    font-size: 4em;
+    color: $dark_blue;
+    margin-top: 0;
+    margin-bottom: .3em;
+    padding: 0;
+    border-bottom: none;
+    text-align: center;
+  }
+  a {
+    background: $link_blue;
+    display: inline-block;
+    font-size: 1.5em;
+    color: white;
+    padding: .8em 3em;
+    text-decoration: none;
+  }
+}

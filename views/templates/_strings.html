@@ -1,0 +1,19 @@
+<div class="panel strings" fire-data="strings" fire-list="true">
+	<div class="flexhead">
+		<div class="toptop">
+			<!-- @@include _hamburger.html -->
+			<span class="icon-search"></span>
+		</div>
+		<h1>Strings</h1>
+	</div>
+	<div class="flexbody">
+		<div class="list">
+			<div class="list" fire-each="strings">
+				{{#each strings }}
+					<p data-on-click="getData,showPanel" data-url="{{path}}" data-panel=".string">{{ brand }} {{ name }} {{ guage }} <span class="delete">&times;</span></p>
+				{{/each}}
+			</div>
+		</div>
+	</div>
+	<span class="create" data-on-click="showPanel" data-panel=".add-string">&plus;</span>
+</div>

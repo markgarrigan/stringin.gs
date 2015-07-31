@@ -1,0 +1,17 @@
+<div class="panel events" fire-data="events" fire-list="true">
+	<div class="flexhead">
+		<div class="toptop">
+			<!-- @@include _hamburger.html -->
+			<span class="icon-search"></span>
+		</div>
+		<h1>Events</h1>
+	</div>
+	<div class="flexbody">
+		<div class="list">
+			{{#each events}}
+				<p data-on-click="getData,showPanel" data-url="{{path}}" data-panel=".event">{{ name }} {{ year start }} <span class="delete">&times;</span></p>
+			{{/each}}
+		</div>
+	</div>
+	<span class="create" data-on-click="showPanel" data-panel=".add-event">&plus;</span>
+</div>

@@ -1,0 +1,22 @@
+<div class="panel add-racquet checkFirst" fire-data="">
+	<div class="flexhead">
+		<div class="toptop">
+			<span class="icon-arrow-left" data-on-click="hidePanel" data-panel=".add-racquet"></span>
+		</div>
+		<h1>New Racquet</h1>
+		<!-- <span class="save" data-on-click="addStringer,showPanel" data-panel=".stringers">Save</span> -->
+	</div>
+	<div class="flexbody">
+		<form>
+      <div class="form-row">
+				<label for="new-string-brand">Brand</label>
+				<input id="new-string-brand" type="text" name="customers/{{id}}/racquets/brand">
+			</div>
+			<div class="form-row">
+				<label for="new-string-name">Name</label>
+				<input id="new-string-name" type="text" name="customers/{{id}}/racquets/name">
+			</div>
+		</form>
+		<button type="button" name="button" data-on-click="showPanel" fire-on-click="push customers/{{id}}/racquets" data-panel=".racquets">Save</button>
+	</div>
+</div>

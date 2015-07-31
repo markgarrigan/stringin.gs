@@ -1,0 +1,21 @@
+<div class="panel edit-stringer checkFirst" fire-data="">
+  <div class="flexhead">
+  	<div class="toptop">
+  		<span class="icon-arrow-left" data-on-click="hidePanel" data-panel=".edit-stringer"></span>
+      <span data-on-click="hidePanel" fire-on-click="update {{path}}" data-panel=".edit-stringer">DONE</span>
+  	</div>
+  	<h1>&nbsp;</h1>
+  </div>
+  <div class="flexbody">
+  	<form>
+  		<div class="form-row">
+  			<label for="edit-stringer-first-name">First Name</label>
+  			<input id="edit-stringer-first-name" type="text" name="{{path}}/fname" value="{{fname}}">
+  		</div>
+  		<div class="form-row">
+  			<label for="edit-stringer-last-name">Last Name</label>
+  			<input id="edit-stringer-last-name" type="text" name="{{path}}/lname" value="{{lname}}">
+  		</div>
+  	</form>
+  </div>
+</div>

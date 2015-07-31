@@ -1,13 +1,12 @@
-// Include gulp
-var gulp = require('gulp');
-
-// Include Our Plugins
-var jshint = require('gulp-jshint');
-var sass = require('gulp-ruby-sass');
-var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
-var rename = require('gulp-rename');
-var replace = require('gulp-replace');
+var gulp                = require('gulp');
+var replace             = require('gulp-replace');
+var tap                 = require('gulp-tap');
+var jshint              = require('gulp-jshint');
+var webserver           = require('gulp-webserver');
+var sass                = require('gulp-sass');
+var concat              = require('gulp-concat');
+var uglify              = require('gulp-uglify');
+var extender            = require('gulp-html-extend');
 
 var paths = {
   scripts: ['vendor/javascripts/jquery.history.js',
@@ -15,48 +14,50 @@ var paths = {
   'vendor/javascripts/isEventSupported.js',
   'vendor/javascripts/jquery.mobile.custom.min.js',
   'vendor/javascripts/jquery.quicksearch.js',
-  'vendor/javascripts/jquery.payment.js',
-  'vendor/javascripts/jquery.order.js',
-  'vendor/javascripts/picker.js',
-  'vendor/javascripts/picker.date.js',
+  'vendor/javascripts/moment.js',
   'vendor/javascripts/handlebars.js',
-  'assets/javascripts/app.js',
-  'assets/javascripts/controllers.js',
-  'assets/javascripts/bindings.js',
-  'src/javascripts/**/*.js'],
+  'vendor/javascripts/fires.js',
+  'assets/javascripts/stringings.js'],
   styles: 'assets/stylesheets/**/*.scss'
 };
 
+gulp.task('serve', function() {
+  gulp.src('./public')
+    .pipe(webserver({
+      fallback: 'index.html'
+    }));
+});
+
+gulp.task('extend', function () {
+  gulp.src('views/**/*.html', { base: 'views' })
+  .pipe(extender({annotations:false,verbose:false})) // default options
+  .pipe(gulp.dest('./public'));
+});
+
 // Lint Task
 gulp.task('lint', function() {
-  return gulp.src('assets/javascripts/*.js')
+  return gulp.src('assets/javascripts/**/*.js')
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
 });
 
-// Compile Our Sass
-
-gulp.task('sass', function () {
-  return sass('assets/stylesheets/')
-    .on('error', function (err) {
-    console.error('Error!', err.message);
-  })
-    .pipe(gulp.dest('public/stylesheets'));
-});
-
 // Concatenate & Minify JS
-gulp.task('scripts', function() {
+gulp.task('scripts', ['lint'], function() {
   return gulp.src(paths.scripts)
     .pipe(uglify())
-    .pipe(concat('app.js'))
-    .pipe(gulp.dest('public/javascripts'))
+    .pipe(concat('stringings.js'))
+    .pipe(gulp.dest('public/javascripts'));
 });
 
-// Watch Files For Changes
-gulp.task('watch', function() {
-  gulp.watch(paths.scripts, ['lint', 'scripts']);
+// Compile sass into CSS & auto-inject into browsers
+gulp.task('sass', function() {
+    return gulp.src(paths.styles)
+        .pipe(sass())
+        .pipe(gulp.dest("public/stylesheets"));
+});
+
+gulp.task('default', ['sass','scripts','extend','serve'], function() {
   gulp.watch(paths.styles, ['sass']);
+  gulp.watch(paths.scripts, ['scripts']);
+  gulp.watch(['views/**/*.html'], ['extend']);
 });
-
-// Default Task
-gulp.task('default', ['lint', 'sass', 'scripts', 'watch']);

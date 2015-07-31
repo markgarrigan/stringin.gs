@@ -1,64 +1,108 @@
-form {
-	.form-row {
-		position: relative;
-		@include clearfix;
-		&.border {
-			border-bottom: 1px solid $shaded_border;
-		}
+.form-row {
+	position: relative;
+	@include clearfix;
+	@include align-items(stretch);
+	@include display(flex);
+	@include flex-direction(row);
+	@include justify-content(flex-start);
+	&.border {
+		border-bottom: 1px solid $shaded_border;
 	}
-	input[type=number]::-webkit-inner-spin-button,
-	input[type=number]::-webkit-outer-spin-button {
-		-webkit-appearance: none;
-		margin: 0;
-	}
-	input[type="range"] {
-		display: none;
-	}
-	input[type="text"]:not(.range) {
+	label {
+		@include flex(1);
+		min-width: 95px;
+		max-width: 120px;
 		background: transparent;
 		border: none;
 		outline: none;
 		border-bottom: 1px solid $shaded_border;
-		display: block;
-		width: 100%;
 		box-sizing: border-box;
-		padding: 1rem .6rem;
-		font-size: 1rem;
-		color: $dark_blue;
-		padding-right: 4rem;
-		+ .plus {
-			font-family: arial,serif;
-			display: block;
-			width: 2rem;
-			height: 2rem;
-			border: 1px solid $link_blue;
-			border-radius: 50%;
-			text-align: center;
-			line-height: 2rem;
-			font-size: 2rem;
-			color: $link_blue;
-			position: absolute;
-			top: 50%;
-			right: 1rem;
-			margin-top: -1rem;
-			cursor: pointer;
-		}
+		padding: 1.1rem .6rem;
+		font-size: .8rem;
+		color: $placeholder;
 	}
-	.results {
-		position: fixed;
-		width: 100%;
-		top: 0;
-		bottom: 0;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+input[type="range"] {
+	display: none;
+}
+input[type="text"]:not(.range) {
+	background: transparent;
+	border: none;
+	outline: none;
+	border-bottom: 1px solid $shaded_border;
+	@include flex(3);
+	box-sizing: border-box;
+	padding: 1rem .6rem;
+	font-size: 1rem;
+	color: $dark_blue;
+	+ .plus {
+		font-family: arial,serif;
+		display: block;
+		width: 2rem;
+		height: 2rem;
+		border: 1px solid $link_blue;
+		border-radius: 50%;
+		text-align: center;
+		line-height: 2rem;
+		font-size: 2rem;
+		color: $link_blue;
+		position: absolute;
+		top: 50%;
+		right: 1rem;
+		margin-top: -1rem;
+		cursor: pointer;
+	}
+}
+.results {
+	position: fixed;
+	width: 100%;
+	top: 0;
+	bottom: 0;
+	background: white;
+	z-index: 200;
+	overflow-x: hidden;
+	overflow-y: auto;
+	p {
 		background: white;
-		z-index: 200;
-		overflow-x: hidden;
-		overflow-y: auto;
-		p {
-			background: white;
-			color: $darkest_text;
-		}
-		&.gonzo {
-			display: none;
+		color: $darkest_text;
+	}
+	&.gonzo {
+		display: none;
+	}
+}
+
+
+form {
+	@include flex(1);
+	& + button,
+	& + .action {
+		@include flex(1);
+		max-height: 2.5rem;
+		position: relative;
+		border-top: 1px solid $shaded_border;
+		background: white;
+	}
+	& + .action {
+		button {
+			position: absolute;
+			top: 0;
+			left: 50%;
+			@include transform(translate(-50%,-15px));
+			width: 3rem;
+			height: 3rem;
+			text-align: center;
+			background-color: $green;
+			color: white;
+			font-size: 1rem;
+			border: 0;
+			border-radius: 50%;
+			outline: none;
+			line-height: 3rem;
 		}
 	}
 }

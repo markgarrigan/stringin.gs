@@ -1,0 +1,25 @@
+table {
+  width: 100%;
+  &.bars {
+  }
+  &.flat {
+    td {
+      padding: .2rem 0;
+    }
+    td:first-child {
+      width: 1.6rem;
+      text-align: center;
+    }
+    td span {
+      height: .4rem;
+      background: $green;
+      display: inline-block;
+    }
+    td:last-child {
+      width: 2.2rem;
+      padding-left: .4rem;
+      padding-right: .4rem;
+      text-align: right;
+    }
+  }
+}

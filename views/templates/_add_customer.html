@@ -1,0 +1,22 @@
+<div class="panel add-customer">
+	<div class="flexhead">
+		<div class="toptop">
+			<span class="icon-arrow-left" data-on-click="hidePanel" data-panel=".add-customer"></span>
+		</div>
+		<h1>New Customer</h1>
+		<!-- <span class="save" data-on-click="addStringer,showPanel" data-panel=".stringers">Save</span> -->
+	</div>
+	<div class="flexbody">
+		<form>
+			<div class="form-row">
+				<label for="new-customer-fname">First Name</label>
+				<input id="new-customer-fname" type="text" name="customers/fname">
+			</div>
+			<div class="form-row">
+				<label for="new-customer-lname">Last Name</label>
+				<input id="new-customer-lname" type="text" name="customers/lname">
+			</div>
+		</form>
+		<button type="button" name="button" data-on-click="showPanel" fire-on-click="push customers" data-panel=".customers">Save</button>
+	</div>
+</div>

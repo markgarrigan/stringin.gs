@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en" fire-app="stringings">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="x-ua-compatible" content="ie=edge, chrome=1" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<title>stringin.gs</title>
+<link rel="stylesheet" href="/stylesheets/app.css" />
+<link href="/images/apple-touch-icon.png" rel="apple-touch-icon" />
+<link href="/images/apple-touch-icon-76x76.png" rel="apple-touch-icon" sizes="76x76" />
+<link href="/images/apple-touch-icon-120x120.png" rel="apple-touch-icon" sizes="120x120" />
+<link href="/images/apple-touch-icon-152x152.png" rel="apple-touch-icon" sizes="152x152" />
+<link rel="icon" type="image/png" href="/images/favicon.png">
+<script src="/javascripts/modernizr.custom.js"></script>
+</head>
+<body data-on-load="initHistory" data-initial=".home" id="stringings-app">
+	<div class="all-container">
+		<div class="app-nav" data-on-mouseenter="moveContent">
+			<a class="home" href="/" data-on-click="showPanel,moveContentBack" data-move="touch" data-panel=".home" data-key="h">
+				<img class="mark" src="/images/stringings.png" /> <span><img src="/images/wstringings.png" /></span>
+			</a>
+			<ul>
+				<li><a href="#" data-on-click="showPanel,moveContentBack" data-panel=".stringers" data-key="s"><strong>S</strong><span>tringers</span></a><a class="add" href="#" data-on-click="showPanel,moveContentBack" data-panel=".add-stringer">Add</a></li>
+				<li><a href="#" data-on-click="showPanel,moveContentBack" data-panel=".events" data-key="e"><strong>E</strong><span>vents</span></a><a class="add" href="">Add</a></li>
+				<!-- <li><a href="#" data-on-click="showPanel,moveContentBack" data-panel=".racquets" data-key="r"><strong>R</strong><span>acquets</span></a><a class="add" href="">Add</a></li> -->
+				<li><a href="#" data-on-click="showPanel,moveContentBack" data-panel=".strings" data-key="t"><strong>S</strong><span>trings</span></a><a class="add" href="#" data-on-click="showPanel,moveContentBack" data-panel=".add-string">Add</a></li>
+				<li><a href="#" data-on-click="showPanel,moveContentBack" data-panel=".customers" data-key="c"><strong>C</strong><span>ustomers</span></a><a class="add" href="#" data-on-click="showPanel,moveContentBack" data-panel=".add-customer">Add</a></li>
+			</ul>
+			<h3>Settings</h3>
+			<ul>
+				<li><a href="#" data-on-click="showPanel,moveContentBack" data-panel=".account" data-key="a"><strong>A</strong><span>ccount</span></a></li>
+				<li><a href="#" data-on-click="showPanel,moveContentBack" data-panel=".billing" data-key="b"><strong>B</strong><span>illing</span></a></li>
+				<li><a href="#" data-on-click="logout,moveContentBack"><strong class="no-border">L</strong><span>og Out</span></a></li>
+				<li><a href="#" data-on-click="showPanel,moveContentBack" data-panel=".help" data-key="h"><strong>H</strong><span>elp</span></a></li>
+			</ul>
+		</div>
+		<div class="app-content" data-click="moveContentBack" data-on-mouseenter="moveContentBack" data-force="true">
+<div class="panel login">
+	<div>
+		<img class="bigboy" src="/images/stringings.png">
+		<a href="#" class="signin google" data-on-click="oAuthLogin" data-oauth="google">Sign in with Google</a>
+		<a href="#" class="signin twitter" data-on-click="oAuthLogin" data-oauth="twitter">Sign in with Twitter</a>
+	</div>
+</div>
+
+<div class="panel home">
+	<div class="flexhead single no-words">
+<div class="hamburger" id="hamburger" data-on-click="toggleContent">&bull; &bull; &bull;</div>
+
+	</div>
+	<div class="flexbody align-center">
+		<div class="welcome">
+			<h1>Welcome!</h1>
+			<a href="" data-on-click="showPanel" data-panel=".stringing" data-key="n">Add your first stringing</a>
+		</div>
+	</div>
+</div>
+
+
+<div class="panel stringers" fire-data="stringers" fire-list="true">
+	<div class="flexhead">
+		<div class="toptop">
+<div class="hamburger" id="hamburger" data-on-click="toggleContent">&bull; &bull; &bull;</div>
+
+			<span class="icon-search"></span>
+		</div>
+		<h1>Stringers</h1>
+	</div>
+	<div class="flexbody">
+		<div class="list">
+			{{#each stringers }}
+				<p data-on-click="getData,showPanel" data-url="{{path}}" data-panel=".stringer">{{ fname }} {{ lname }} <span class="delete">&times;</span></p>
+			{{/each}}
+		</div>
+	</div>
+	<span class="create" data-on-click="showPanel" data-panel=".add-stringer">&plus;</span>
+</div>
+
+<div class="panel stringer checkFirst" fire-data="">
+	<div class="flexhead">
+		<div class="toptop">
+			<span class="icon-arrow-left" data-on-click="showPanel" data-panel=".stringers"></span>
+			<span data-on-click="getData,showPanel" data-url="{{path}}" data-panel=".edit-stringer">EDIT</span>
+		</div>
+		<h1>{{ fname }} {{ lname }}</h1>
+	</div>
+	<div class="flexbody">
+		{{#if stringings}}
+		<div class="tabview">
+			<div class="tabs">
+				<div data-on-click="showTab" data-tab="#stringer-day" class="selected">Day</div>
+				<div data-on-click="showTab" data-tab="#stringer-week">Week</div>
+				<div data-on-click="showTab" data-tab="#stringer-month">Month</div>
+			</div>
+			<div class="tab show" id="stringer-day">
+				<h2 class="data">12 <span>done</span></h2>
+				<div class="scroll data bottom vert" id="stringer-day-strung">
+					<div class="list">
+						<p>Roger Federer</p>
+						<p>Roger Federer</p>
+						<p>Mark Garrigan</p>
+						<p>Roger Federer</p>
+						<p>Roger Federer</p>
+						<p>Mark Garrigan</p>
+						<p>Roger Federer</p>
+						<p>Roger Federer</p>
+						<p>Mark Garrigan</p>
+					</div>
+				</div>
+			</div>
+			<div class="tab" id="stringer-week">
+				<h2 class="data">25 <span>done</span></h2>
+				<table class="bars flat">
+					<tr>
+						<td>S</td>
+						<td><span style="width:45%;"></span></td>
+						<td>2</td>
+					</tr>
+				</table>
+			</div>
+			<div class="tab" id="stringer-month">
+				<h2 class="data">138 <span>done</span></h2>
+				<div class="data bars bottom vert">
+					<div>
+						<span>1</span>
+						<span><span style="height: 14%"></span></span>
+						<span>12</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		{{/if}}
+		{{#unless stringings}}
+		<div class="data none">
+			<div>
+				<h2>There are no stringings to show!</h2>
+				<a href="" data-on-click="showPanel" data-panel=".stringing">Add stringing</a>
+			</div>
+		</div>
+		{{/unless}}
+	</div>
+</div>
+
+<div class="panel edit-stringer checkFirst" fire-data="">
+  <div class="flexhead">
+  	<div class="toptop">
+  		<span class="icon-arrow-left" data-on-click="hidePanel" data-panel=".edit-stringer"></span>
+      <span data-on-click="hidePanel" fire-on-click="update {{path}}" data-panel=".edit-stringer">DONE</span>
+  	</div>
+  	<h1>&nbsp;</h1>
+  </div>
+  <div class="flexbody">
+  	<form>
+  		<div class="form-row">
+  			<label for="edit-stringer-first-name">First Name</label>
+  			<input id="edit-stringer-first-name" type="text" name="{{path}}/fname" value="{{fname}}">
+  		</div>
+  		<div class="form-row">
+  			<label for="edit-stringer-last-name">Last Name</label>
+  			<input id="edit-stringer-last-name" type="text" name="{{path}}/lname" value="{{lname}}">
+  		</div>
+  	</form>
+  </div>
+</div>
+
+<div class="panel add-stringer">
+	<div class="flexhead">
+		<div class="toptop">
+			<span class="icon-arrow-left" data-on-click="hidePanel" data-panel=".add-stringer"></span>
+		</div>
+		<h1>New Stringer</h1>
+		<!-- <span class="save" data-on-click="addStringer,showPanel" data-panel=".stringers">Save</span> -->
+	</div>
+	<div class="flexbody">
+		<form>
+			<div class="form-row">
+				<label for="new-stringer-first-name">First Name</label>
+				<input id="new-stringer-first-name" type="text" name="stringers/fname">
+			</div>
+			<div class="form-row">
+				<label for="new-stringer-last-name">Last Name</label>
+				<input id="new-stringer-last-name" type="text" name="stringers/lname">
+			</div>
+		</form>
+		<button type="button" name="button" data-on-click="showPanel" fire-on-click="push stringers" data-panel=".stringers">Save</button>
+	</div>
+</div>
+
+
+<div class="panel strings" fire-data="strings" fire-list="true">
+	<div class="flexhead">
+		<div class="toptop">
+<div class="hamburger" id="hamburger" data-on-click="toggleContent">&bull; &bull; &bull;</div>
+
+			<span class="icon-search"></span>
+		</div>
+		<h1>Strings</h1>
+	</div>
+	<div class="flexbody">
+		<div class="list">
+			<div class="list" fire-each="strings">
+				{{#each strings }}
+					<p data-on-click="getData,showPanel" data-url="{{path}}" data-panel=".string">{{ brand }} {{ name }} {{ guage }} <span class="delete">&times;</span></p>
+				{{/each}}
+			</div>
+		</div>
+	</div>
+	<span class="create" data-on-click="showPanel" data-panel=".add-string">&plus;</span>
+</div>
+
+<div class="panel string checkFirst" fire-data="">
+	<div class="flexhead">
+		<div class="toptop">
+			<span class="icon-arrow-left" data-on-click="showPanel" data-panel=".strings"></span>
+      <span data-on-click="getData,showPanel" data-url="{{path}}" data-panel=".edit-string">EDIT</span>
+		</div>
+		<h1>{{ name }} {{ guage }}</h1>
+	</div>
+	<div class="flexbody">
+		{{#if stringings}}
+		<div class="tabview">
+			<div class="tabs">
+				<div data-on-click="showTab" data-tab="#string-day" class="selected">Day</div>
+				<div data-on-click="showTab" data-tab="#string-week">Week</div>
+				<div data-on-click="showTab" data-tab="#string-month">Month</div>
+			</div>
+			<div class="tab show" id="string-day">
+				<h2 class="data">12 <span>done</span></h2>
+				<div class="scroll data bottom vert" id="string-day-strung">
+					<div class="list">
+						<p>Roger Federer</p>
+						<p>Roger Federer</p>
+						<p>Mark Garrigan</p>
+						<p>Roger Federer</p>
+						<p>Roger Federer</p>
+						<p>Mark Garrigan</p>
+						<p>Roger Federer</p>
+						<p>Roger Federer</p>
+						<p>Mark Garrigan</p>
+					</div>
+				</div>
+			</div>
+			<div class="tab" id="string-week">
+				<h2 class="data">25 <span>done</span></h2>
+				<table class="bars flat">
+					<tr>
+						<td>S</td>
+						<td><span style="width:45%;"></span></td>
+						<td>2</td>
+					</tr>
+				</table>
+			</div>
+			<div class="tab" id="string-month">
+				<h2 class="data">138 <span>done</span></h2>
+				<div class="data bars bottom vert">
+					<div>
+						<span>1</span>
+						<span><span style="height: 14%"></span></span>
+						<span>12</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		{{/if}}
+		{{#unless stringings}}
+		<div class="data none">
+			<div>
+				<h2>There are no stringings to show!</h2>
+				<a href="" data-on-click="showPanel" data-panel=".stringing">Add stringing</a>
+			</div>
+		</div>
+		{{/unless}}
+	</div>
+</div>
+
+<div class="panel edit-string checkFirst" fire-data="">
+  <div class="flexhead">
+  	<div class="toptop">
+  		<span class="icon-arrow-left" data-on-click="hidePanel" data-panel=".edit-string"></span>
+      <span data-on-click="hidePanel" fire-on-click="update {{path}}" data-panel=".edit-string">DONE</span>
+  	</div>
+  	<h1>&nbsp;</h1>
+  </div>
+  <div class="flexbody">
+  	<form>
+      <div class="form-row">
+				<label for="edit-string-brand">Brand</label>
+				<input id="edit-string-brand" type="text" name="{{path}}/brand"  value="{{ brand }}">
+			</div>
+			<div class="form-row">
+				<label for="edit-string-name">Name</label>
+				<input id="edit-string-name" type="text" name="{{path}}/name"  value="{{ name }}">
+			</div>
+      <div class="form-row">
+				<label for="edit-string-guage">Guage</label>
+				<input id="edit-string-guage" type="text" name="{{path}}/guage"  value="{{ guage }}">
+			</div>
+  	</form>
+  </div>
+</div>
+
+<div class="panel add-string">
+	<div class="flexhead">
+		<div class="toptop">
+			<span class="icon-arrow-left" data-on-click="hidePanel" data-panel=".add-string"></span>
+		</div>
+		<h1>New String</h1>
+		<!-- <span class="save" data-on-click="addStringer,showPanel" data-panel=".stringers">Save</span> -->
+	</div>
+	<div class="flexbody">
+		<form>
+      <div class="form-row">
+				<label for="new-string-brand">Brand</label>
+				<input id="new-string-brand" type="text" name="strings/brand">
+			</div>
+			<div class="form-row">
+				<label for="new-string-name">Name</label>
+				<input id="new-string-name" type="text" name="strings/name">
+			</div>
+			<div class="form-row">
+				<label for="new-string-guage">Guage</label>
+				<input id="new-string-guage" type="text" name="strings/guage">
+			</div>
+		</form>
+		<button type="button" name="button" data-on-click="showPanel" fire-on-click="push strings" data-panel=".strings">Save</button>
+	</div>
+</div>
+
+
+<div class="panel customers" fire-data="customers" fire-list="true">
+	<div class="flexhead">
+		<div class="toptop">
+<div class="hamburger" id="hamburger" data-on-click="toggleContent">&bull; &bull; &bull;</div>
+
+			<span class="icon-search"></span>
+		</div>
+		<h1>Customers</h1>
+	</div>
+	<div class="flexbody">
+		<div class="list">
+			{{#each customers }}
+				<p data-on-click="getData,showPanel" data-url="{{path}}" data-panel=".customer">{{ fname }} {{ lname }} <span class="delete">&times;</span></p>
+			{{/each}}
+		</div>
+	</div>
+	<span class="create" data-on-click="showPanel" data-panel=".add-customer">&plus;</span>
+</div>
+
+<div class="panel customer checkFirst" fire-data="">
+	<div class="flexhead">
+		<div class="toptop">
+			<span class="icon-arrow-left" data-on-click="showPanel" data-panel=".customers"></span>
+			<span data-on-click="getData,showPanel" data-url="{{path}}" data-panel=".edit-customer">EDIT</span>
+		</div>
+		<h1>{{ fname }} {{ lname }}</h1>
+	</div>
+	<div class="flexbody">
+		{{#if stringings}}
+		<div class="tabview">
+			<div class="tabs">
+				<div data-on-click="showTab" data-tab="#customer-day" class="selected">Day</div>
+				<div data-on-click="showTab" data-tab="#customer-week">Week</div>
+				<div data-on-click="showTab" data-tab="#customer-month">Month</div>
+			</div>
+			<div class="tab show" id="customer-day">
+				<h2 class="data">12 <span>done</span></h2>
+				<div class="scroll data bottom vert" id="customer-day-strung">
+					<div class="list">
+						<p>Roger Federer</p>
+						<p>Roger Federer</p>
+						<p>Mark Garrigan</p>
+						<p>Roger Federer</p>
+						<p>Roger Federer</p>
+						<p>Mark Garrigan</p>
+						<p>Roger Federer</p>
+						<p>Roger Federer</p>
+						<p>Mark Garrigan</p>
+					</div>
+				</div>
+			</div>
+			<div class="tab" id="customer-week">
+				<h2 class="data">25 <span>done</span></h2>
+				<table class="bars flat">
+					<tr>
+						<td>S</td>
+						<td><span style="width:45%;"></span></td>
+						<td>2</td>
+					</tr>
+				</table>
+			</div>
+			<div class="tab" id="customer-month">
+				<h2 class="data">138 <span>done</span></h2>
+				<div class="data bars bottom vert">
+					<div>
+						<span>1</span>
+						<span><span style="height: 14%"></span></span>
+						<span>12</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		{{/if}}
+		{{#unless stringings}}
+		<div class="data none" rv-unless="app.details.customer.stringings">
+			<div>
+				<h2>There are no stringings to show!</h2>
+				<a href="" data-on-click="showPanel" data-panel=".stringing">Add stringing</a>
+			</div>
+		</div>
+		{{/unless}}
+		<div class="bottom-nav">
+			<span href="#" data-on-click="getData,showPanel" data-url="{{path}}/racquets" data-panel=".racquets">
+				<img src="/images/racquet-icon.png" alt="Racquets" />
+			</span>
+		</div>
+	</div>
+</div>
+
+<div class="panel edit-customer checkFirst" fire-data="">
+  <div class="flexhead">
+  	<div class="toptop">
+  		<span class="icon-arrow-left" data-on-click="hidePanel" data-panel=".edit-customer"></span>
+      <span data-on-click="hidePanel" fire-on-click="update {{path}}" data-panel=".edit-customer">DONE</span>
+  	</div>
+  	<h1>&nbsp;</h1>
+  </div>
+  <div class="flexbody">
+  	<form>
+      <div class="form-row">
+  			<label for="edit-customer-first-name">First Name</label>
+  			<input id="edit-customer-first-name" type="text" name="{{path}}/fname" value="{{ fname }}">
+  		</div>
+  		<div class="form-row">
+  			<label for="edit-customer-last-name">Last Name</label>
+  			<input id="edit-customer-last-name" type="text" name="{{path}}/lname" value="{{ lname }}">
+  		</div>
+  	</form>
+  </div>
+</div>
+
+<div class="panel add-customer">
+	<div class="flexhead">
+		<div class="toptop">
+			<span class="icon-arrow-left" data-on-click="hidePanel" data-panel=".add-customer"></span>
+		</div>
+		<h1>New Customer</h1>
+		<!-- <span class="save" data-on-click="addStringer,showPanel" data-panel=".stringers">Save</span> -->
+	</div>
+	<div class="flexbody">
+		<form>
+			<div class="form-row">
+				<label for="new-customer-fname">First Name</label>
+				<input id="new-customer-fname" type="text" name="customers/fname">
+			</div>
+			<div class="form-row">
+				<label for="new-customer-lname">Last Name</label>
+				<input id="new-customer-lname" type="text" name="customers/lname">
+			</div>
+		</form>
+		<button type="button" name="button" data-on-click="showPanel" fire-on-click="push customers" data-panel=".customers">Save</button>
+	</div>
+</div>
+
+
+<div class="panel racquets" fire-data="" fire-list="true">
+	<div class="flexhead">
+		<div class="toptop">
+			<span class="icon-arrow-left" data-on-click="showPanel" data-panel=".customer"></span>
+			{{#if racquets}}
+			<span class="icon-search"></span>
+			{{/if}}
+		</div>
+		<h1>Racquets</h1>
+	</div>
+	<div class="flexbody">
+		{{#if racquets}}
+			{{#each racquets}}
+			<div class="list">
+				<p>{{ brand }} {{ name }} {{ guage }} <span class="delete">&times;</span></p>
+			</div>
+			{{/each}}
+		{{/if}}
+		{{#unless racquets}}
+		<div class="data none">
+      <div>
+				<h2>This customer has no racquets!</h2>
+        <a href="" data-on-click="getData,showPanel" data-url="{{ parent }}" data-panel=".add-racquet">Add a racquet</a>
+      </div>
+    </div>
+		{{/unless}}
+	</div>
+	{{#if racquets}}
+	<span class="create" data-on-click="getData,showPanel" data-url="{{ parent }}" data-panel=".add-racquet">&plus;</span>
+	{{/if}}
+</div>
+
+<div class="panel add-racquet checkFirst" fire-data="">
+	<div class="flexhead">
+		<div class="toptop">
+			<span class="icon-arrow-left" data-on-click="hidePanel" data-panel=".add-racquet"></span>
+		</div>
+		<h1>New Racquet</h1>
+		<!-- <span class="save" data-on-click="addStringer,showPanel" data-panel=".stringers">Save</span> -->
+	</div>
+	<div class="flexbody">
+		<form>
+      <div class="form-row">
+				<label for="new-string-brand">Brand</label>
+				<input id="new-string-brand" type="text" name="customers/{{id}}/racquets/brand">
+			</div>
+			<div class="form-row">
+				<label for="new-string-name">Name</label>
+				<input id="new-string-name" type="text" name="customers/{{id}}/racquets/name">
+			</div>
+		</form>
+		<button type="button" name="button" data-on-click="showPanel" fire-on-click="push customers/{{id}}/racquets" data-panel=".racquets">Save</button>
+	</div>
+</div>
+
+
+<div class="panel events" fire-data="events" fire-list="true">
+	<div class="flexhead">
+		<div class="toptop">
+<div class="hamburger" id="hamburger" data-on-click="toggleContent">&bull; &bull; &bull;</div>
+
+			<span class="icon-search"></span>
+		</div>
+		<h1>Events</h1>
+	</div>
+	<div class="flexbody">
+		<div class="list">
+			{{#each events}}
+				<p data-on-click="getData,showPanel" data-url="{{path}}" data-panel=".event">{{ name }} {{ year start }} <span class="delete">&times;</span></p>
+			{{/each}}
+		</div>
+	</div>
+	<span class="create" data-on-click="showPanel" data-panel=".add-event">&plus;</span>
+</div>
+
+<div class="panel event checkFirst" fire-data="">
+	<div class="flexhead">
+		<div class="toptop">
+			<span class="icon-arrow-left" data-on-click="showPanel" data-panel=".events"></span>
+      <span data-on-click="getData,showPanel" data-url="{{path}}" data-panel=".edit-event">EDIT</span>
+		</div>
+		<h1>{{ name }}</h1>
+	</div>
+	<div class="flexbody">
+		{{#if stringings}}
+		<div class="tabview">
+			<div class="tabs">
+				<div data-on-click="showTab" data-tab="#event-day" class="selected">Day</div>
+				<div data-on-click="showTab" data-tab="#event-week">Week</div>
+				<div data-on-click="showTab" data-tab="#event-month">Month</div>
+			</div>
+			<div class="tab show" id="event-day">
+				<h2 class="data">12 <span>done</span></h2>
+				<div class="scroll data bottom vert" id="event-day-strung">
+					<div class="list">
+						<p>Roger Federer</p>
+						<p>Roger Federer</p>
+						<p>Mark Garrigan</p>
+						<p>Roger Federer</p>
+						<p>Roger Federer</p>
+						<p>Mark Garrigan</p>
+						<p>Roger Federer</p>
+						<p>Roger Federer</p>
+						<p>Mark Garrigan</p>
+					</div>
+				</div>
+			</div>
+			<div class="tab" id="event-week">
+				<h2 class="data">25 <span>done</span></h2>
+				<table class="bars flat">
+					<tr>
+						<td>S</td>
+						<td><span style="width:45%;"></span></td>
+						<td>2</td>
+					</tr>
+				</table>
+			</div>
+			<div class="tab" id="event-month">
+				<h2 class="data">138 <span>done</span></h2>
+				<div class="data bars bottom vert">
+					<div>
+						<span>1</span>
+						<span><span style="height: 14%"></span></span>
+						<span>12</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		{{/if}}
+		{{#unless stringings}}
+		<div class="data none">
+			<div>
+				<h2>There are no stringings to show!</h2>
+				<a href="" data-on-click="showPanel" data-panel=".stringing">Add stringing</a>
+			</div>
+		</div>
+		{{/unless}}
+	</div>
+</div>
+
+<div class="panel add-event">
+	<div class="flexhead">
+		<div class="toptop">
+			<span class="icon-arrow-left" data-on-click="hidePanel" data-panel=".add-event"></span>
+		</div>
+		<h1>New Event</h1>
+		<!-- <span class="save" data-on-click="addStringer,showPanel" data-panel=".stringers">Save</span> -->
+	</div>
+	<div class="flexbody">
+		<form>
+			<div class="form-row">
+				<label for="new-event-name">Name</label>
+				<input id="new-event-name" type="text" name="events/name">
+			</div>
+			<div class="form-row">
+        <label for="new-event-start">Start</label>
+  			<input id="new-event-start" name="events/start" type="text">
+  		</div>
+      <div class="form-row">
+        <label for="new-event-end">End</label>
+  			<input id="new-event-end" name="events/end" type="text">
+  		</div>
+		</form>
+		<button type="button" name="button" data-on-click="showPanel" fire-on-click="push events" data-panel=".events">Save</button>
+	</div>
+</div>
+
+<div class="panel edit-event checkFirst" fire-data="">
+  <div class="flexhead">
+  	<div class="toptop">
+  		<span class="icon-arrow-left" data-on-click="hidePanel" data-panel=".edit-event"></span>
+      <span data-on-click="hidePanel" fire-on-click="update {{path}}" data-panel=".edit-event">DONE</span>
+  	</div>
+  	<h1>&nbsp;</h1>
+  </div>
+  <div class="flexbody">
+  	<form>
+			<div class="form-row">
+				<label for="edit-event-name">Name</label>
+				<input id="edit-event-name" type="text" name="{{path}}/name"  value="{{ name }}">
+			</div>
+      <div class="form-row">
+				<label for="edit-event-start">Start Date</label>
+				<input id="edit-event-start" type="text" name="{{path}}/start" value="{{ start }}">
+			</div>
+      <div class="form-row">
+				<label for="edit-event-end">End Date</label>
+				<input id="edit-event-end" type="text" name="{{path}}/end"  value="{{ end }}">
+			</div>
+  	</form>
+  </div>
+</div>
+
+
+<div class="panel loading visible">
+	<div class="flexbody align-center">
+		<div class="loader">
+			Hang on <span class="animated bounce">&bull;</span> <span class="animated bounce delay-1">&bull;</span> <span class="animated bounce delay-2">&bull;</span>
+		</div>
+	</div>
+</div>
+
+		</div>
+	</div>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script src="https://cdn.firebase.com/js/client/2.2.7/firebase.js"></script>
+	<script src="/javascripts/stringings.js"></script>
+</body>
+</html>

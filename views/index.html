@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" fire-app="stringings">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="x-ua-compatible" content="ie=edge, chrome=1" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<title>stringin.gs</title>
+<link rel="stylesheet" href="/stylesheets/app.css" />
+<link href="/images/apple-touch-icon.png" rel="apple-touch-icon" />
+<link href="/images/apple-touch-icon-76x76.png" rel="apple-touch-icon" sizes="76x76" />
+<link href="/images/apple-touch-icon-120x120.png" rel="apple-touch-icon" sizes="120x120" />
+<link href="/images/apple-touch-icon-152x152.png" rel="apple-touch-icon" sizes="152x152" />
+<link rel="icon" type="image/png" href="/images/favicon.png">
+<script src="/javascripts/modernizr.custom.js"></script>
+</head>
+<body data-on-load="initHistory" data-initial=".home" id="stringings-app">
+	<div class="all-container">
+		<div class="app-nav" data-on-mouseenter="moveContent">
+			<a class="home" href="/" data-on-click="showPanel,moveContentBack" data-move="touch" data-panel=".home" data-key="h">
+				<img class="mark" src="/images/stringings.png" /> <span><img src="/images/wstringings.png" /></span>
+			</a>
+			<ul>
+				<li><a href="#" data-on-click="showPanel,moveContentBack" data-panel=".stringers" data-key="s"><strong>S</strong><span>tringers</span></a><a class="add" href="#" data-on-click="showPanel,moveContentBack" data-panel=".add-stringer">Add</a></li>
+				<li><a href="#" data-on-click="showPanel,moveContentBack" data-panel=".events" data-key="e"><strong>E</strong><span>vents</span></a><a class="add" href="">Add</a></li>
+				<!-- <li><a href="#" data-on-click="showPanel,moveContentBack" data-panel=".racquets" data-key="r"><strong>R</strong><span>acquets</span></a><a class="add" href="">Add</a></li> -->
+				<li><a href="#" data-on-click="showPanel,moveContentBack" data-panel=".strings" data-key="t"><strong>S</strong><span>trings</span></a><a class="add" href="#" data-on-click="showPanel,moveContentBack" data-panel=".add-string">Add</a></li>
+				<li><a href="#" data-on-click="showPanel,moveContentBack" data-panel=".customers" data-key="c"><strong>C</strong><span>ustomers</span></a><a class="add" href="#" data-on-click="showPanel,moveContentBack" data-panel=".add-customer">Add</a></li>
+			</ul>
+			<h3>Settings</h3>
+			<ul>
+				<li><a href="#" data-on-click="showPanel,moveContentBack" data-panel=".account" data-key="a"><strong>A</strong><span>ccount</span></a></li>
+				<li><a href="#" data-on-click="showPanel,moveContentBack" data-panel=".billing" data-key="b"><strong>B</strong><span>illing</span></a></li>
+				<li><a href="#" data-on-click="logout,moveContentBack"><strong class="no-border">L</strong><span>og Out</span></a></li>
+				<li><a href="#" data-on-click="showPanel,moveContentBack" data-panel=".help" data-key="h"><strong>H</strong><span>elp</span></a></li>
+			</ul>
+		</div>
+		<div class="app-content" data-click="moveContentBack" data-on-mouseenter="moveContentBack" data-force="true">
+			<!-- @@include templates/_login.html -->
+			<!-- @@include templates/_home.html -->
+
+			<!-- @@include templates/_stringers.html -->
+			<!-- @@include templates/_stringer.html -->
+			<!-- @@include templates/_edit_stringer.html -->
+			<!-- @@include templates/_add_stringer.html -->
+
+			<!-- @@include templates/_strings.html -->
+			<!-- @@include templates/_string.html -->
+			<!-- @@include templates/_edit_string.html -->
+			<!-- @@include templates/_add_string.html -->
+
+			<!-- @@include templates/_customers.html -->
+			<!-- @@include templates/_customer.html -->
+			<!-- @@include templates/_edit_customer.html -->
+			<!-- @@include templates/_add_customer.html -->
+
+			<!-- @@include templates/_racquets.html -->
+			<!-- @@include templates/_add_racquet.html -->
+
+			<!-- @@include templates/_events.html -->
+			<!-- @@include templates/_event.html -->
+			<!-- @@include templates/_add_event.html -->
+			<!-- @@include templates/_edit_event.html -->
+
+			<!-- @@include templates/_loading.html -->
+		</div>
+	</div>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script src="https://cdn.firebase.com/js/client/2.2.7/firebase.js"></script>
+	<script src="/javascripts/stringings.js"></script>
+</body>
+</html>

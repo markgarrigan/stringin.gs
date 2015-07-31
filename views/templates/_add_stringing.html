@@ -1,0 +1,78 @@
+<div class="panel stringing">
+	<div class="flexhead">
+		<span class="cancel" data-on-click="hidePanel" data-panel=".stringing">Cancel</span>
+		<h1>New Stringing</h1>
+		<span class="save">Save</span>
+	</div>
+	<div class="flexbody">
+		<div class="form-row">
+			<input type="text" value="" name="strung_on" placeholder="Strung On" class="datepicker">
+		</div>
+		<div class="form-row">
+			<input type="text" value="" placeholder="Stringer Name" data-on-focus="positionResults" data-on-keyup="quickSearch" data-results=".stringer" data-on-blur="hideResults">
+			<!-- <span class="plus" data-on-click="showPanel" data-panel=".stringers">&plus;</span> -->
+			<div class="list stringer results gonzo">
+			</div>
+		</div>
+
+		<script id="pick-stringer-template" type="text/x-handlebars-template">
+			<p data-on-click="makeValue">{{full_name}}</p>
+		</script>
+
+		<div class="form-row">
+			<input type="text" value="" placeholder="Customer Name" data-on-focus="positionResults" data-on-keyup="quickSearch" data-results=".customer" data-on-blur="hideResults">
+			<!-- <span class="plus" data-on-click="showPanel" data-panel=".customers">&plus;</span> -->
+			<div class="list customer results gonzo">
+			</div>
+		</div>
+
+		<script id="pick-customer-template" type="text/x-handlebars-template">
+			<p data-on-click="makeValue">{{full_name}}</p>
+		</script>
+
+		<div class="form-row">
+			<input type="text" value="" placeholder="Racquet" data-on-focus="positionResults" data-on-keyup="quickSearch" data-results=".racquet" data-on-blur="hideResults">
+			<!-- <span class="plus" data-on-click="showPanel" data-panel=".racquets">&plus;</span> -->
+			<div class="list racquet results gonzo">
+				<p data-on-click="makeValue">Wilson Prostaff 6.1</p>
+				<p data-on-click="makeValue">Yonex RDS 100</p>
+				<p data-on-click="makeValue">Head Prestige</p>
+			</div>
+		</div>
+		<div class="form-row border">
+			<label for="main_tension" class="range-label">
+				Main Tension
+				<input type="number" name="main_tension" id="main_tension" value="" data-on-change="setSlider" data-slider="main_tension" class="range only-number">
+			</label>
+			<div class="range-container">
+				<input type="range" class="slider" value="58" min="1" max="100" step=".5" data-highlight="true" data-input="main_tension" />
+			</div>
+		</div>
+		<div class="form-row">
+			<input type="text" value="" placeholder="Main String" data-on-focus="positionResults" data-on-keyup="quickSearch" data-results=".m-string" data-on-blur="hideResults">
+			<!-- <span class="plus" data-on-click="showPanel" data-panel=".strings">&plus;</span> -->
+			<div class="list m-string string results gonzo">
+			</div>
+		</div>
+		<div class="form-row border">
+			<label for="cross_tension" class="range-label">
+				Cross Tension
+				<input type="number" name="cross_tension" id="cross_tension" value="" data-on-change="setSlider" data-slider="cross_tension" class="range only-number">
+			</label>
+			<div class="range-container">
+				<input type="range" class="slider" value="60" min="1" max="100" step=".5" data-highlight="true" data-input="cross_tension" />
+			</div>
+		</div>
+		<div class="form-row">
+			<input type="text" value="" placeholder="Cross String" data-on-focus="positionResults" data-on-keyup="quickSearch" data-results=".c-string" data-on-blur="hideResults">
+			<!-- <span class="plus" data-on-click="showPanel" data-panel=".strings">&plus;</span> -->
+			<div class="list c-string string results gonzo">
+			</div>
+		</div>
+
+		<script id="pick-string-template" type="text/x-handlebars-template">
+			<p data-on-click="makeValue">{{full_name}}</p>
+		</script>
+
+	</div>
+</div>

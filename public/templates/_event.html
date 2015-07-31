@@ -1,0 +1,64 @@
+<div class="panel event checkFirst" fire-data="">
+	<div class="flexhead">
+		<div class="toptop">
+			<span class="icon-arrow-left" data-on-click="showPanel" data-panel=".events"></span>
+      <span data-on-click="getData,showPanel" data-url="{{path}}" data-panel=".edit-event">EDIT</span>
+		</div>
+		<h1>{{ name }}</h1>
+	</div>
+	<div class="flexbody">
+		{{#if stringings}}
+		<div class="tabview">
+			<div class="tabs">
+				<div data-on-click="showTab" data-tab="#event-day" class="selected">Day</div>
+				<div data-on-click="showTab" data-tab="#event-week">Week</div>
+				<div data-on-click="showTab" data-tab="#event-month">Month</div>
+			</div>
+			<div class="tab show" id="event-day">
+				<h2 class="data">12 <span>done</span></h2>
+				<div class="scroll data bottom vert" id="event-day-strung">
+					<div class="list">
+						<p>Roger Federer</p>
+						<p>Roger Federer</p>
+						<p>Mark Garrigan</p>
+						<p>Roger Federer</p>
+						<p>Roger Federer</p>
+						<p>Mark Garrigan</p>
+						<p>Roger Federer</p>
+						<p>Roger Federer</p>
+						<p>Mark Garrigan</p>
+					</div>
+				</div>
+			</div>
+			<div class="tab" id="event-week">
+				<h2 class="data">25 <span>done</span></h2>
+				<table class="bars flat">
+					<tr>
+						<td>S</td>
+						<td><span style="width:45%;"></span></td>
+						<td>2</td>
+					</tr>
+				</table>
+			</div>
+			<div class="tab" id="event-month">
+				<h2 class="data">138 <span>done</span></h2>
+				<div class="data bars bottom vert">
+					<div>
+						<span>1</span>
+						<span><span style="height: 14%"></span></span>
+						<span>12</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		{{/if}}
+		{{#unless stringings}}
+		<div class="data none">
+			<div>
+				<h2>There are no stringings to show!</h2>
+				<a href="" data-on-click="showPanel" data-panel=".stringing">Add stringing</a>
+			</div>
+		</div>
+		{{/unless}}
+	</div>
+</div>

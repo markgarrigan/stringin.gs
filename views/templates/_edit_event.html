@@ -1,0 +1,25 @@
+<div class="panel edit-event checkFirst" fire-data="">
+  <div class="flexhead">
+  	<div class="toptop">
+  		<span class="icon-arrow-left" data-on-click="hidePanel" data-panel=".edit-event"></span>
+      <span data-on-click="hidePanel" fire-on-click="update {{path}}" data-panel=".edit-event">DONE</span>
+  	</div>
+  	<h1>&nbsp;</h1>
+  </div>
+  <div class="flexbody">
+  	<form>
+			<div class="form-row">
+				<label for="edit-event-name">Name</label>
+				<input id="edit-event-name" type="text" name="{{path}}/name"  value="{{ name }}">
+			</div>
+      <div class="form-row">
+				<label for="edit-event-start">Start Date</label>
+				<input id="edit-event-start" type="text" name="{{path}}/start" value="{{ start }}">
+			</div>
+      <div class="form-row">
+				<label for="edit-event-end">End Date</label>
+				<input id="edit-event-end" type="text" name="{{path}}/end"  value="{{ end }}">
+			</div>
+  	</form>
+  </div>
+</div>

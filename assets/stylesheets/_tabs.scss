@@ -1,0 +1,43 @@
+.tabview {
+  @include display(flex);
+  @include flex(1);
+  @include flex-direction(column);
+  .tabs {
+    @include flex(1);
+    @include display(flex);
+    @include align-items(center);
+    @include justify-content(space-between);
+    min-height: 3rem;
+    max-height: 3rem;
+    height: 3rem;
+    * {
+      @include flex(1);
+      height: 3rem;
+      max-height: 3rem;
+      text-align: center;
+      line-height: 3rem;
+      text-transform: uppercase;
+      color: $link_blue;
+      padding: 0 .5rem;
+      background: $background;
+      border-bottom: 2px solid $background;
+      @include transition(.2s all linear);
+      &.selected {
+        border-bottom: 2px solid $link_blue;
+      }
+    }
+  }
+  .tab {
+    display: none;
+    &.show {
+      @include display(flex);
+      @include flex(1);
+      @include flex-direction(column);
+      overflow-x: hidden;
+      overflow-y: auto;
+      * {
+        @include flex(1);
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+form + button {
+  background: $green;
+  color: white;
+  border: 0;
+}
+
+.create {
+  background: $green;
+  position: fixed;
+  z-index: 50;
+  bottom: 1rem;
+  right: 1rem;
+  width: 4rem;
+  height: 4rem;
+  text-align: center;
+  display: block;
+  line-height: 4rem;
+  color: white;
+  border-radius: 50%;
+  font-size: 2rem;
+  font-weight: 100;
+}

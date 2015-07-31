@@ -1,13 +1,13 @@
 .list {
-	background: white;
 	p {
+		background: white;
 		position: relative;
 		border-bottom: 1px solid $shaded_border;
 		box-sizing: border-box;
 		padding: 1rem .6rem;
 		margin: 0;
-		font-size: 1rem;
-		color: $darkest_text;
+		font-size: .8rem;
+		color: $dark_blue;
 		cursor: pointer;
 		.delete {
 			background: red;

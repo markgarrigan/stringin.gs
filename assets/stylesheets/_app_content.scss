@@ -1,41 +1,34 @@
-@include media($bp-small) {
-	.app-content {
-		background: $background;
-		position: absolute;
-		left: 0px;
-		right: 0px;
-		overflow-y: auto;
-		overflow-x: hidden;
-		height: 100%;
-		min-width: 100%;
-		z-index: 5;
-		@include transition (all .3s ease-in-out);
-		&.moved {
-			left: 83%;
-			.close {
-				display: none;
-			}
-		}
-		&.no-scroll {
-			overflow-y: hidden;
-		}
+.app-content {
+	background: $background;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	overflow: hidden;
+	z-index: 5;
+	box-shadow: -4px 0 0 rgba(0,0,0,.2);
+	@include transform(translate(0,0));
+	@include transition (all .3s ease-in-out);
+	&.moved {
+		@include transform(translate(82%, 0));
 	}
+	@include media($bp-large) {
+		left: 200px;
+		&.moved {
+			@include transform(translate(0, 0));
+		}
+	};
 }
 
-@include media($bp-large) {
-	.app-content {
-		min-width: inherit;
-		left: 65px;
-		&.moved {
-			left: 200px;
-			.close {
-				display: block;
-			}
-		}
-	}
-	.touch {
+.no-touch {
+	@include media($bp-large) {
 		.app-content {
-			left: 200px;
+			left: 65px;
+			@include transform(translate(0,0));
+			&.moved {
+				@include transform(translate(135px, 0));
+			}
 		}
 	}
 }

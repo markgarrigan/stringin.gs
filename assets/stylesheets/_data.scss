@@ -1,0 +1,102 @@
+h2.data {
+  font-weight: 100;
+  font-size: 4.5rem;
+  text-align: center;
+  span {
+    display: block;
+    font-size: .8rem;
+    text-transform: uppercase;
+  }
+}
+
+.data {
+  &.none {
+    @include display(flex);
+    @include flex(1);
+    @include justify-content(center);
+    @include align-content(center);
+    @include align-items(center);
+    div {
+      width: 100%;
+      text-align: center;
+      @include transform(translate(0,-25%));
+      h2 {
+        font-weight: 100;
+      }
+      a {
+        background: $link_blue;
+        display: inline-block;
+        font-size: 1.5em;
+        color: white;
+        padding: .8em 3em;
+        text-decoration: none;
+      }
+    }
+  }
+  &.scroll {
+    background: white;
+    &.bottom {
+      border-top: 1px solid $shaded_border;
+      @include align-self(end);
+    }
+    &.vert {
+      overflow-x: hidden;
+      overflow-y: auto;
+      max-height: 30vh;
+    }
+    &.flat {
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+  }
+  &.bars {
+    &.bottom {
+      @include align-self(end);
+    }
+    &.vert {
+      overflow: auto;
+      white-space: nowrap;
+      // height: 40vh;
+      // max-height: 40vh;
+      @include display(flex);
+      div {
+        display: inline-table;
+        height: 35vh;
+        align-self: flex-end;
+        position: relative;
+        width: 2rem;
+        & > span {
+          &:first-child {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+          }
+          &:nth-child(2) {
+            position: absolute;
+            top: 1.5rem;
+            bottom: 15px;
+            left: 50%;
+            width: .4rem;
+            @include transform(translate(-50%, 0));
+            span {
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              width: 100%;
+              background: $green;
+            }
+          }
+          &:last-child {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}

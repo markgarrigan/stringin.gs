@@ -1,0 +1,17 @@
+<div class="panel stringers" fire-data="stringers" fire-list="true">
+	<div class="flexhead">
+		<div class="toptop">
+			<!-- @@include _hamburger.html -->
+			<span class="icon-search"></span>
+		</div>
+		<h1>Stringers</h1>
+	</div>
+	<div class="flexbody">
+		<div class="list">
+			{{#each stringers }}
+				<p data-on-click="getData,showPanel" data-url="{{path}}" data-panel=".stringer">{{ fname }} {{ lname }} <span class="delete">&times;</span></p>
+			{{/each}}
+		</div>
+	</div>
+	<span class="create" data-on-click="showPanel" data-panel=".add-stringer">&plus;</span>
+</div>

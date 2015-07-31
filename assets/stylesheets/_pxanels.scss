@@ -1,0 +1,130 @@
+@include media($bp-small) {
+	.panel {
+		background: $background;
+		position: absolute;
+		top: 0;
+		left: 100%;
+		min-width: 100%;
+		width: 100%;
+		height: 0px;
+		overflow: hidden;
+		z-index: 10;
+		opacity: 0;
+		white-space: nowrap;
+		@include transition (all .4s ease-in-out);
+		&.visible {
+			left: 0;
+			opacity: 1;
+			height: 100%;
+			overflow-x: hidden;
+			overflow-y: auto;
+			&.no-scroll {
+				overflow-y: hidden;
+			}
+		}
+		h1 {
+			color: $dark_blue;
+			font-weight: 300;
+			font-size: 1rem;
+			text-align: center;
+			margin: 0;
+			background: $shade;
+			padding: .8rem 0;
+			border-bottom: 1px solid $shaded_border;
+			white-space: nowrap;
+			position: relative;
+			box-sizing: border-box;
+			&.no-words {
+				background: transparent;
+				border-bottom: none;
+			}
+			.cancel,
+			.save,
+			.add {
+				display: block;
+				position: absolute;
+				z-index: 100;
+				top: 0;
+				left: 0;
+				height: 2.7rem;
+				color: $link_blue;
+				font-size: 1rem;
+				line-height: 2.7;
+				cursor: pointer;
+				padding: 0 10px;
+			}
+			// .cancel {
+			// 	left: 0;
+			// }
+			// .save,
+			// .add {
+			// 	right: 0;
+			// }
+			.add {
+				font-size: 3em;
+			}
+			.close {
+				display: none;
+			}
+		}
+		.welcome {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 100%;
+			height: 20em;
+			text-align: center;
+			max-width: 100%;
+			@include transform(translate(-50%,-50%));
+			h1 {
+				background: transparent;
+				font-weight: 300;
+				font-size: 4em;
+				color: $dark_blue;
+				margin-top: 0;
+				margin-bottom: .3em;
+				padding: 0;
+				border-bottom: none;
+				text-align: center;
+			}
+			a {
+				background: $link_blue;
+				display: inline-block;
+				font-size: 1.5em;
+				color: white;
+				padding: .8em 3em;
+				text-decoration: none;
+			}
+		}
+	}
+}
+
+@include media($bp-large) {
+	.panel {
+		h1 {
+			color: $dark_blue;
+			font-weight: 300;
+			font-size: 1.5rem;
+			text-align: center;
+			margin: 0;
+			margin-top: -1px;
+			background: $shade;
+			padding: .5rem;
+			border-bottom: 1px solid $shaded_border;
+			.hamburger {
+				display: none;
+			}
+		}
+		.close {
+			display: block;
+			position: absolute;
+			z-index: 100;
+			top: 0;
+			right: 1rem;
+			color: $dark_blue;
+			font-size: 3.5rem;
+			line-height: 4.4rem;
+			cursor: pointer;
+		}
+	}
+}

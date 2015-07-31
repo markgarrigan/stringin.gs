@@ -1,6 +1,4 @@
 var gulp                = require('gulp');
-var replace             = require('gulp-replace');
-var tap                 = require('gulp-tap');
 var jshint              = require('gulp-jshint');
 var webserver           = require('gulp-webserver');
 var sass                = require('gulp-sass');

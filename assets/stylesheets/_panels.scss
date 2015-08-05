@@ -58,6 +58,10 @@
 			font-size: 1.6rem;
 			padding: 0 .5rem;
 		}
+		&.no-words {
+			background: transparent;
+			border-bottom: 0;
+		}
 	}
 	.body {
 		position: absolute;

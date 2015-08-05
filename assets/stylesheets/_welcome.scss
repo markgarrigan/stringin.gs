@@ -1,5 +1,10 @@
 .welcome {
   text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  @include transform(translate(-50%,-85%));
+  width: 100%;
   h1 {
     background: transparent;
     font-weight: 300;

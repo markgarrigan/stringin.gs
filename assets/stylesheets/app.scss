@@ -14,6 +14,7 @@ body {
 	color: #333;
 	overflow-y: hidden;
 	overflow-x: hidden;
+	@include user-select(none);
 }
 
 .hide {

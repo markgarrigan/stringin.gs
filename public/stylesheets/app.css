@@ -1399,6 +1399,9 @@ form + button {
   font-size: 2rem;
   font-weight: 100; }
 
+.moved .create {
+  display: none; }
+
 .list p {
   background: white;
   position: relative;

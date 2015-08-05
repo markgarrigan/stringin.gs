@@ -1,0 +1,21 @@
+<div class="panel edit-racquet checkFirst" fire-data="">
+  <div class="head">
+  	<div class="toptop">
+  		<span class="icon-arrow-left" data-on-click="hidePanel" data-panel=".edit-racquet"></span>
+      <span data-on-click="hidePanel" fire-on-click="update {{ __path }}" data-panel=".edit-racquet">DONE</span>
+  	</div>
+  	<h1>&nbsp;</h1>
+  </div>
+  <div class="body">
+  	<form>
+      <div class="form-row">
+				<label for="edit-racquet-brand">Brand</label>
+				<input id="edit-racquet-brand" type="text" name="{{ __path }}/brand"  value="{{ brand }}">
+			</div>
+			<div class="form-row">
+				<label for="edit-racquet-name">Name</label>
+				<input id="edit-racquet-name" type="text" name="{{ __path }}/name"  value="{{ name }}">
+			</div>
+  	</form>
+  </div>
+</div>

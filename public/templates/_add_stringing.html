@@ -1,78 +1,87 @@
-<div class="panel stringing">
-	<div class="flexhead">
-		<span class="cancel" data-on-click="hidePanel" data-panel=".stringing">Cancel</span>
+<div class="panel add-stringing">
+	<div class="head">
+		<div class="toptop">
+			<span class="icon-arrow-left" data-on-click="hidePanel" data-panel=".add-stringing"></span>
+		</div>
 		<h1>New Stringing</h1>
-		<span class="save">Save</span>
+		<!-- <span class="save" data-on-click="addStringer,showPanel" data-panel=".stringers">Save</span> -->
 	</div>
-	<div class="flexbody">
-		<div class="form-row">
-			<input type="text" value="" name="strung_on" placeholder="Strung On" class="datepicker">
-		</div>
-		<div class="form-row">
-			<input type="text" value="" placeholder="Stringer Name" data-on-focus="positionResults" data-on-keyup="quickSearch" data-results=".stringer" data-on-blur="hideResults">
-			<!-- <span class="plus" data-on-click="showPanel" data-panel=".stringers">&plus;</span> -->
-			<div class="list stringer results gonzo">
+	<div class="body scrollable">
+		<form>
+      <div class="form-row">
+				<label for="new-stringing-date">Strung On</label>
+				<input id="new-stringing-date" type="text" name="stringings/date" class="datedropper">
 			</div>
-		</div>
+			<div class="form-row">
+				<label for="new-stringing-stringer">Stringer</label>
+				<input id="new-stringing-stringer" type="text" name="stringings/stringer" data-on-keydown="positionResults" data-on-keyup="quickSearch" data-results=".stringer" data-on-blur="hideResults">
+				<div class="list stringer results gonzo" fire-data="stringers" fire-list="true">
+					{{#each stringers}}
+						<p data-on-click="makeValue">{{fname}} {{lname}}</p>
+					{{/each}}
+				</div>
+			</div>
+			<div class="form-row">
+				<label for="new-stringing-customer">Customer</label>
+				<input id="new-stringing-customer" type="text" name="stringings/customer" data-on-focus="positionResults" data-on-keyup="quickSearch" data-results=".customer" data-on-blur="hideResults">
+				<div class="list customer results gonzo" fire-data="customers" fire-list="true">
+					{{#each customers}}
+						<p data-on-click="makeValue,getData" data-now="true" data-target="#new-stringing-racquet-list" data-url="{{ __path }}">{{fname}} {{lname}}</p>
+					{{/each}}
+				</div>
+			</div>
+			<div class="form-row">
+				<label for="new-stringing-racquet">Racquet</label>
+				<input id="new-stringing-racquet" type="text" name="stringings/racquet" data-on-focus="positionResults" data-on-keyup="quickSearch" data-results=".racquet" data-on-blur="hideResults">
+				<div id="new-stringing-racquet-list" class="list racquet results gonzo" fire-data="">
+					{{#each racquets}}
+						<p data-on-click="makeValue">{{brand}} {{name}}</p>
+					{{/each}}
+				</div>
+			</div>
 
-		<script id="pick-stringer-template" type="text/x-handlebars-template">
-			<p data-on-click="makeValue">{{full_name}}</p>
-		</script>
+			<div class="form-row">
+				<label for="new-stringing-main-tension" class="range-label">Main Tension</label>
+				<input type="number" name="stringings/main_tension" id="new-stringing-main-tension" data-on-change="setSlider" data-slider="stringings/main_tension" class="only-number">
+			</div>
 
-		<div class="form-row">
-			<input type="text" value="" placeholder="Customer Name" data-on-focus="positionResults" data-on-keyup="quickSearch" data-results=".customer" data-on-blur="hideResults">
-			<!-- <span class="plus" data-on-click="showPanel" data-panel=".customers">&plus;</span> -->
-			<div class="list customer results gonzo">
+			<div class="form-row border">
+				<div class="range-container">
+					<input type="range" class="slider" value="58" min="10" max="85" step=".5" data-highlight="true" data-input="stringings/main_tension" />
+				</div>
 			</div>
-		</div>
 
-		<script id="pick-customer-template" type="text/x-handlebars-template">
-			<p data-on-click="makeValue">{{full_name}}</p>
-		</script>
+			<div class="form-row">
+				<label for="new-stringing-main-string">Main String</label>
+				<input id="new-stringing-main-string" type="text" name="stringings/main_string" data-on-focus="positionResults" data-on-keyup="quickSearch" data-results=".m-string" data-on-blur="hideResults">
+				<div class="list m-string results gonzo" fire-data="strings" fire-list="true">
+					{{#each strings}}
+						<p data-on-click="makeValue">{{brand}} {{name}} {{gauge}}</p>
+					{{/each}}
+				</div>
+			</div>
 
-		<div class="form-row">
-			<input type="text" value="" placeholder="Racquet" data-on-focus="positionResults" data-on-keyup="quickSearch" data-results=".racquet" data-on-blur="hideResults">
-			<!-- <span class="plus" data-on-click="showPanel" data-panel=".racquets">&plus;</span> -->
-			<div class="list racquet results gonzo">
-				<p data-on-click="makeValue">Wilson Prostaff 6.1</p>
-				<p data-on-click="makeValue">Yonex RDS 100</p>
-				<p data-on-click="makeValue">Head Prestige</p>
+			<div class="form-row">
+				<label for="new-stringing-cross-tension" class="range-label">Cross Tension</label>
+				<input id="new-stringing-cross-tension" type="number" name="stringings/cross_tension" id="new-stringing-cross-tension" data-on-change="setSlider" data-slider="stringings/cross_tension" class="only-number">
 			</div>
-		</div>
-		<div class="form-row border">
-			<label for="main_tension" class="range-label">
-				Main Tension
-				<input type="number" name="main_tension" id="main_tension" value="" data-on-change="setSlider" data-slider="main_tension" class="range only-number">
-			</label>
-			<div class="range-container">
-				<input type="range" class="slider" value="58" min="1" max="100" step=".5" data-highlight="true" data-input="main_tension" />
-			</div>
-		</div>
-		<div class="form-row">
-			<input type="text" value="" placeholder="Main String" data-on-focus="positionResults" data-on-keyup="quickSearch" data-results=".m-string" data-on-blur="hideResults">
-			<!-- <span class="plus" data-on-click="showPanel" data-panel=".strings">&plus;</span> -->
-			<div class="list m-string string results gonzo">
-			</div>
-		</div>
-		<div class="form-row border">
-			<label for="cross_tension" class="range-label">
-				Cross Tension
-				<input type="number" name="cross_tension" id="cross_tension" value="" data-on-change="setSlider" data-slider="cross_tension" class="range only-number">
-			</label>
-			<div class="range-container">
-				<input type="range" class="slider" value="60" min="1" max="100" step=".5" data-highlight="true" data-input="cross_tension" />
-			</div>
-		</div>
-		<div class="form-row">
-			<input type="text" value="" placeholder="Cross String" data-on-focus="positionResults" data-on-keyup="quickSearch" data-results=".c-string" data-on-blur="hideResults">
-			<!-- <span class="plus" data-on-click="showPanel" data-panel=".strings">&plus;</span> -->
-			<div class="list c-string string results gonzo">
-			</div>
-		</div>
 
-		<script id="pick-string-template" type="text/x-handlebars-template">
-			<p data-on-click="makeValue">{{full_name}}</p>
-		</script>
+			<div class="form-row border">
+				<div class="range-container">
+					<input type="range" class="slider" value="60" min="10" max="85" step=".5" data-highlight="true" data-input="stringings/cross_tension" />
+				</div>
+			</div>
 
+			<div class="form-row">
+				<label for="new-stringing-cross-string">Cross String</label>
+				<input id="new-stringing-cross-string" type="text" name="stringings/cross_string" data-on-focus="positionResults" data-on-keyup="quickSearch" data-results=".c-string" data-on-blur="hideResults">
+				<div class="list c-string results gonzo" fire-data="strings" fire-list="true">
+					{{#each strings}}
+						<p data-on-click="makeValue">{{brand}} {{name}} {{gauge}}</p>
+					{{/each}}
+				</div>
+			</div>
+		</form>
+		<button type="button" name="button" data-on-click="showPanel" fire-on-click="push stringings" data-panel=".stringings">Save</button>
 	</div>
 </div>

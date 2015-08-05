@@ -1,5 +1,5 @@
 <div class="panel racquets" fire-data="" fire-list="true">
-	<div class="flexhead">
+	<div class="head">
 		<div class="toptop">
 			<span class="icon-arrow-left" data-on-click="showPanel" data-panel=".customer"></span>
 			{{#if racquets}}
@@ -8,11 +8,11 @@
 		</div>
 		<h1>Racquets</h1>
 	</div>
-	<div class="flexbody">
+	<div class="body">
 		{{#if racquets}}
 			{{#each racquets}}
 			<div class="list">
-				<p>{{ brand }} {{ name }} {{ guage }} <span class="delete">&times;</span></p>
+				<p data-on-click="getData,showPanel" data-url="{{ __path }}" data-panel=".racquet">{{ brand }} {{ name }} {{ guage }} <span class="delete">&times;</span></p>
 			</div>
 			{{/each}}
 		{{/if}}
@@ -20,12 +20,12 @@
 		<div class="data none">
       <div>
 				<h2>This customer has no racquets!</h2>
-        <a href="" data-on-click="getData,showPanel" data-url="{{ parent }}" data-panel=".add-racquet">Add a racquet</a>
+        <a href="" data-on-click="getData,showPanel" data-url="{{ __parent }}" data-panel=".add-racquet">Add a racquet</a>
       </div>
     </div>
 		{{/unless}}
 	</div>
 	{{#if racquets}}
-	<span class="create" data-on-click="getData,showPanel" data-url="{{ parent }}" data-panel=".add-racquet">&plus;</span>
+	<span class="create" data-on-click="getData,showPanel" data-url="{{ __parent }}" data-panel=".add-racquet">&plus;</span>
 	{{/if}}
 </div>

@@ -26,49 +26,104 @@
         _.options.baseRef = base;
       };
 
-      public.sync = function() {
-        _.initDatas();
+      public.sync = function(callback) {
         _.initClicks();
+        _.initDatas(function() {
+          callback();
+        });
       };
 
-      public.getData = function(path, signature, isList, callback) {
+      public.getData = function(path, signature, isList, callback, element) {
+        var error = false;
         var ref = new Firebase(_.options.app.toString() + path);
+        var data = {};
         ref.on('value', function(snapshot) {
+          var parent = snapshot.ref().parent().toString().replace(_.options.app.toString(), '').replace('%3A', ':'),
+          base = _.options.baseRef;
           if (snapshot.exists()) {
-            var data = snapshot.key(),
-            obj = snapshot.val(),
-            path = snapshot.ref().toString().replace(_.options.app.toString(), '').replace('%3A', ':'),
-            collection = {},
-            html;
-            if (signature in _.templates) {
-              if (isList) {
-                collection.parent = snapshot.ref().parent().toString().replace(_.options.app.toString(), '').replace('%3A', ':');
-                collection.base = _.options.baseRef;
-                collection[data] = [];
-                for(key in obj) {
-                  var newObj = obj[key];
-                  newObj.id = key;
-                  newObj.path = path + '/' + key;
-                  collection[data].push(newObj);
-                }
-              } else {
-                obj.path = path;
-                obj.id = data;
+            data = processSnapShot(snapshot,isList);
+            data.__parent = parent;
+            data.__base = base;
+            injectData(data);
+            var extends = element.querySelectorAll('[fire-extend]');
+            if (extends.length) {
+              for (var i = 0; i < extends.length; i++) {
+                var extend = extends[i].getAttribute('fire-extend'),
+                    list = extends[i].hasAttribute('fire-list');
+                 createChain(extends[i]).on(createOn(extends[i]), function(snapshot) {
+                  if (snapshot.exists()) {
+                    var extendData = processSnapShot(snapshot,list);
+                    for (var key in extendData) {
+                      if (extendData.hasOwnProperty(key)) {
+                        data[key] = extendData[key];
+                      }
+                    }
+                  }
+                  if (i === extends.length - 1) {
+                    if (typeof callback === 'function') {
+                      injectData(data);
+                      callback(error);
+                    }
+                  }
+                });
               }
-              html = _.templates[signature](isList ? collection : obj);
-              if (signature in _.dom) {
-                _.dom[signature].innerHTML = html;
-              }
-            }
-            if (typeof callback === 'function') {
-              callback(true);
+            } else {
+              injectData(data);
             }
           } else {
-            if (typeof callback === 'function') {
-              callback(false);
-            }
+              error = true;
+          }
+          if (typeof callback === 'function') {
+            injectData(data);
+            callback(error);
           }
         });
+
+        function createOn(element) {
+          return element.hasAttribute('fire-on') ? element.getAttribute('fire-on') : 'value';
+        }
+
+        function createChain(element) {
+          var ref = _.options.app.child(_.options.baseRef + '/' + element.getAttribute('fire-extend'));
+          if (element.hasAttribute('fire-order-by-child')) {
+            ref = ref.orderByChild(element.getAttribute('fire-order-by-child'));
+          }
+          if (element.hasAttribute('fire-equal-to')) {
+            ref = ref.equalTo(element.getAttribute('fire-equal-to'));
+          }
+          return ref;
+        }
+
+        function processSnapShot(snapshot,list) {
+          var snapshotKey = snapshot.key(),
+          data = snapshot.val(),
+          path = snapshot.ref().toString().replace(_.options.app.toString(), '').replace('%3A', ':');
+          if (list) {
+            var collection = {};
+            collection[snapshotKey] = [];
+            for(key in data) {
+              var newObj = data[key];
+              newObj.__id = key;
+              newObj.__path = path + '/' + key;
+              collection[snapshotKey].push(newObj);
+            }
+            data = collection;
+          } else {
+            data.__path = path;
+            data.__id = snapshotKey;
+          }
+          return data;
+        }
+
+        function injectData(data) {
+          var html;
+          if (signature in _.templates) {
+            html = _.templates[signature](data);
+          }
+          if (signature in _.dom) {
+            _.dom[signature].innerHTML = html;
+          }
+        }
       };
 
       _.onPush = function(error) {
@@ -106,27 +161,32 @@
                   value = field.type === 'checkbox' ? field.checked : field.value,
                   path = field.getAttribute('name').replace(ref + '/', '').split('/');
               assign(obj,path,value);
+              field.type === 'checkbox' ? field.checked = false : field.value = '';
             }
             _[action](ref,obj, _['on' + capitalizeFirstLetter(action)]);
           }
         });
       };
 
-      _.initDatas = function() {
+      _.initDatas = function(callback) {
         var datas = document.querySelectorAll('[fire-data]');
         for (var i = 0; i < datas.length; i++) {
-          var el = datas[i],
-          sig = createSig();
+          var el = datas[i];
+          var sig = createSig();
           _.dom[sig] = el;
           el.setAttribute('template', sig);
           _.templates[sig] = Hbs.compile(el.innerHTML);
           if (el.getAttribute('fire-data') !== '') {
-            public.getData(_.options.baseRef + '/' + el.getAttribute('fire-data'), sig, el.getAttribute('fire-list'));
+            public.getData(_.options.baseRef + '/' + el.getAttribute('fire-data'), sig, el.getAttribute('fire-list'), callback, el);
           }
         }
       };
 
       return public;
+  }
+
+  function createTemplate(element) {
+
   }
 
   function createRoot() {

@@ -1,0 +1,20 @@
+<div class="panel stringings" fire-data="stringings" fire-list="true">
+	<div class="head">
+		<div class="toptop">
+<div class="hamburger" id="hamburger" data-on-click="toggleContent">&bull; &bull; &bull;</div>
+
+			<span class="icon-search"></span>
+		</div>
+		<h1>Stringings</h1>
+	</div>
+	<div class="body">
+		<div class="list">
+			<div class="list">
+				{{#each stringings }}
+					<p data-on-click="getData,showPanel" data-url="{{ __path }}" data-panel=".string">{{ date }} {{ customer }} <span class="delete">&times;</span></p>
+				{{/each}}
+			</div>
+		</div>
+	</div>
+	<span class="create" data-on-click="showPanel" data-panel=".add-stringing">&plus;</span>
+</div>

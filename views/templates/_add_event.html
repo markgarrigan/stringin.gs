@@ -1,12 +1,12 @@
 <div class="panel add-event">
-	<div class="flexhead">
+	<div class="head">
 		<div class="toptop">
 			<span class="icon-arrow-left" data-on-click="hidePanel" data-panel=".add-event"></span>
 		</div>
 		<h1>New Event</h1>
 		<!-- <span class="save" data-on-click="addStringer,showPanel" data-panel=".stringers">Save</span> -->
 	</div>
-	<div class="flexbody">
+	<div class="body">
 		<form>
 			<div class="form-row">
 				<label for="new-event-name">Name</label>
@@ -14,11 +14,11 @@
 			</div>
 			<div class="form-row">
         <label for="new-event-start">Start</label>
-  			<input id="new-event-start" name="events/start" type="text">
+  			<input id="new-event-start" name="events/start" type="text" class="datedropper">
   		</div>
       <div class="form-row">
         <label for="new-event-end">End</label>
-  			<input id="new-event-end" name="events/end" type="text">
+  			<input id="new-event-end" name="events/end" type="text" class="datedropper">
   		</div>
 		</form>
 		<button type="button" name="button" data-on-click="showPanel" fire-on-click="push events" data-panel=".events">Save</button>

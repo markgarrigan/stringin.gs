@@ -1,0 +1,19 @@
+{
+  "firebase": "stringings",
+  "public": "public",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**",
+    "**/vendor/**",
+    "**/views/**",
+    "package.json",
+    "gulpfile.js",
+    "README.md",
+    "**/assets/**"
+  ],
+  "rewrites": [ {
+    "source": "**",
+    "destination": "/index.html"
+  } ]
+}

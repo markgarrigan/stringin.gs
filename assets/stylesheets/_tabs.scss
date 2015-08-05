@@ -1,19 +1,20 @@
 .tabview {
-  @include display(flex);
-  @include flex(1);
-  @include flex-direction(column);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   .tabs {
-    @include flex(1);
-    @include display(flex);
-    @include align-items(center);
-    @include justify-content(space-between);
     min-height: 3rem;
     max-height: 3rem;
     height: 3rem;
+    @include clearfix;
     * {
-      @include flex(1);
+      display: block;
+      float: left;
       height: 3rem;
       max-height: 3rem;
+      width: 33.3333333%;
       text-align: center;
       line-height: 3rem;
       text-transform: uppercase;
@@ -22,6 +23,7 @@
       background: $background;
       border-bottom: 2px solid $background;
       @include transition(.2s all linear);
+      box-sizing: border-box;
       &.selected {
         border-bottom: 2px solid $link_blue;
       }
@@ -30,14 +32,14 @@
   .tab {
     display: none;
     &.show {
-      @include display(flex);
-      @include flex(1);
-      @include flex-direction(column);
+      position: absolute;
+      display: block;
+      top: 3rem;
+      left: 0;
+      right: 0;
+      bottom: 0;
       overflow-x: hidden;
       overflow-y: auto;
-      * {
-        @include flex(1);
-      }
     }
   }
 }

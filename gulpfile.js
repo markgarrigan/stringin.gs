@@ -11,9 +11,10 @@ var paths = {
   'vendor/javascripts/mousetrap.min.js',
   'vendor/javascripts/isEventSupported.js',
   'vendor/javascripts/jquery.mobile.custom.min.js',
-  'vendor/javascripts/jquery.quicksearch.js',
   'vendor/javascripts/moment.js',
   'vendor/javascripts/handlebars.js',
+  'vendor/javascripts/datedropper.js',
+  'vendor/javascripts/fastclick.js',
   'vendor/javascripts/fires.js',
   'assets/javascripts/stringings.js'],
   styles: 'assets/stylesheets/**/*.scss'

@@ -1,12 +1,12 @@
 <div class="panel stringer checkFirst" fire-data="">
-	<div class="flexhead">
+	<div class="head">
 		<div class="toptop">
 			<span class="icon-arrow-left" data-on-click="showPanel" data-panel=".stringers"></span>
-			<span data-on-click="getData,showPanel" data-url="{{path}}" data-panel=".edit-stringer">EDIT</span>
+			<span data-on-click="getData,showPanel" data-url="{{ __path }}" data-panel=".edit-stringer">EDIT</span>
 		</div>
 		<h1>{{ fname }} {{ lname }}</h1>
 	</div>
-	<div class="flexbody">
+	<div class="body" fire-extend="stringings" fire-order-by-child="stringer" fire-equal-to="{{ fname }} {{ lname }}" fire-on="value" fire-list="true">
 		{{#if stringings}}
 		<div class="tabview">
 			<div class="tabs">
@@ -15,39 +15,24 @@
 				<div data-on-click="showTab" data-tab="#stringer-month">Month</div>
 			</div>
 			<div class="tab show" id="stringer-day">
-				<h2 class="data">12 <span>done</span></h2>
+				<h2 class="data">{{stringings_count_by stringings "day"}} <span>done</span></h2>
 				<div class="scroll data bottom vert" id="stringer-day-strung">
 					<div class="list">
-						<p>Roger Federer</p>
-						<p>Roger Federer</p>
-						<p>Mark Garrigan</p>
-						<p>Roger Federer</p>
-						<p>Roger Federer</p>
-						<p>Mark Garrigan</p>
-						<p>Roger Federer</p>
-						<p>Roger Federer</p>
-						<p>Mark Garrigan</p>
+						{{#stringings_today stringings}}
+						{{/stringings_today}}
 					</div>
 				</div>
 			</div>
 			<div class="tab" id="stringer-week">
-				<h2 class="data">25 <span>done</span></h2>
-				<table class="bars flat">
-					<tr>
-						<td>S</td>
-						<td><span style="width:45%;"></span></td>
-						<td>2</td>
-					</tr>
-				</table>
+				<h2 class="data">{{stringings_count_by stringings "week"}} <span>done</span></h2>
+					{{#stringings_this_week stringings}}
+					{{/stringings_this_week}}
 			</div>
 			<div class="tab" id="stringer-month">
-				<h2 class="data">138 <span>done</span></h2>
+				<h2 class="data">{{stringings_count_by stringings "month"}} <span>done</span></h2>
 				<div class="data bars bottom vert">
-					<div>
-						<span>1</span>
-						<span><span style="height: 14%"></span></span>
-						<span>12</span>
-					</div>
+					{{#stringings_this_month stringings}}
+					{{/stringings_this_month}}
 				</div>
 			</div>
 		</div>
@@ -56,7 +41,7 @@
 		<div class="data none">
 			<div>
 				<h2>There are no stringings to show!</h2>
-				<a href="" data-on-click="showPanel" data-panel=".stringing">Add stringing</a>
+				<a href="" data-on-click="showPanel" data-panel=".add-stringing">Add stringing</a>
 			</div>
 		</div>
 		{{/unless}}

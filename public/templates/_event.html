@@ -1,12 +1,12 @@
 <div class="panel event checkFirst" fire-data="">
-	<div class="flexhead">
+	<div class="head">
 		<div class="toptop">
 			<span class="icon-arrow-left" data-on-click="showPanel" data-panel=".events"></span>
-      <span data-on-click="getData,showPanel" data-url="{{path}}" data-panel=".edit-event">EDIT</span>
+      <span data-on-click="getData,showPanel" data-url="{{ __path }}" data-panel=".edit-event">EDIT</span>
 		</div>
 		<h1>{{ name }}</h1>
 	</div>
-	<div class="flexbody">
+	<div class="body">
 		{{#if stringings}}
 		<div class="tabview">
 			<div class="tabs">
@@ -56,7 +56,7 @@
 		<div class="data none">
 			<div>
 				<h2>There are no stringings to show!</h2>
-				<a href="" data-on-click="showPanel" data-panel=".stringing">Add stringing</a>
+				<a href="" data-on-click="showPanel" data-panel=".add-stringing">Add stringing</a>
 			</div>
 		</div>
 		{{/unless}}

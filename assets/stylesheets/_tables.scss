@@ -10,10 +10,20 @@ table {
       width: 1.6rem;
       text-align: center;
     }
-    td span {
+    td > span {
+      width: 100%;
+      display: block;
+      background: rgba(0, 0, 0, 0.05);
       height: .4rem;
-      background: $green;
-      display: inline-block;
+      position: relative;
+      span {
+        height: .4rem;
+        background: $green;
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
     }
     td:last-child {
       width: 2.2rem;

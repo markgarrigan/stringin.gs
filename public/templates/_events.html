@@ -1,5 +1,5 @@
 <div class="panel events" fire-data="events" fire-list="true">
-	<div class="flexhead">
+	<div class="head">
 		<div class="toptop">
 <div class="hamburger" id="hamburger" data-on-click="toggleContent">&bull; &bull; &bull;</div>
 
@@ -7,10 +7,10 @@
 		</div>
 		<h1>Events</h1>
 	</div>
-	<div class="flexbody">
+	<div class="body">
 		<div class="list">
 			{{#each events}}
-				<p data-on-click="getData,showPanel" data-url="{{path}}" data-panel=".event">{{ name }} {{ year start }} <span class="delete">&times;</span></p>
+				<p data-on-click="getData,showPanel" data-url="{{ __path }}" data-panel=".event">{{ name }} {{ year start }} <span class="delete">&times;</span></p>
 			{{/each}}
 		</div>
 	</div>

@@ -1,12 +1,12 @@
 <div class="panel customer checkFirst" fire-data="">
-	<div class="flexhead">
+	<div class="head">
 		<div class="toptop">
 			<span class="icon-arrow-left" data-on-click="showPanel" data-panel=".customers"></span>
-			<span data-on-click="getData,showPanel" data-url="{{path}}" data-panel=".edit-customer">EDIT</span>
+			<span data-on-click="getData,showPanel" data-url="{{ __path }}" data-panel=".edit-customer">EDIT</span>
 		</div>
 		<h1>{{ fname }} {{ lname }}</h1>
 	</div>
-	<div class="flexbody">
+	<div class="body withbottom">
 		{{#if stringings}}
 		<div class="tabview">
 			<div class="tabs">
@@ -56,14 +56,14 @@
 		<div class="data none" rv-unless="app.details.customer.stringings">
 			<div>
 				<h2>There are no stringings to show!</h2>
-				<a href="" data-on-click="showPanel" data-panel=".stringing">Add stringing</a>
+				<a href="" data-on-click="showPanel" data-panel=".add-stringing">Add stringing</a>
 			</div>
 		</div>
 		{{/unless}}
-		<div class="bottom-nav">
-			<span href="#" data-on-click="getData,showPanel" data-url="{{path}}/racquets" data-panel=".racquets">
-				<img src="/images/racquet-icon.png" alt="Racquets" />
-			</span>
-		</div>
+	</div>
+	<div class="bottom-nav">
+		<span href="#" data-on-click="getData,showPanel" data-url="{{ __path }}/racquets" data-panel=".racquets">
+			<img src="/images/racquet-icon.png" alt="Racquets" />
+		</span>
 	</div>
 </div>

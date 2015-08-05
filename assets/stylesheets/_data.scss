@@ -2,6 +2,11 @@ h2.data {
   font-weight: 100;
   font-size: 4.5rem;
   text-align: center;
+  margin: 0;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  @include transform(translate(-50%,-50%));
   span {
     display: block;
     font-size: .8rem;
@@ -11,15 +16,18 @@ h2.data {
 
 .data {
   &.none {
-    @include display(flex);
-    @include flex(1);
-    @include justify-content(center);
-    @include align-content(center);
-    @include align-items(center);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     div {
+      position: absolute;
+      top: 50%;
+      left: 50%;
       width: 100%;
       text-align: center;
-      @include transform(translate(0,-25%));
+      @include transform(translate(-50%,-50%));
       h2 {
         font-weight: 100;
       }
@@ -37,12 +45,15 @@ h2.data {
     background: white;
     &.bottom {
       border-top: 1px solid $shaded_border;
-      @include align-self(end);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
     }
     &.vert {
       overflow-x: hidden;
       overflow-y: auto;
-      max-height: 30vh;
+      max-height: 40vh;
     }
     &.flat {
       overflow-x: auto;
@@ -51,14 +62,14 @@ h2.data {
   }
   &.bars {
     &.bottom {
-      @include align-self(end);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
     }
     &.vert {
       overflow: auto;
       white-space: nowrap;
-      // height: 40vh;
-      // max-height: 40vh;
-      @include display(flex);
       div {
         display: inline-table;
         height: 35vh;
@@ -80,6 +91,7 @@ h2.data {
             left: 50%;
             width: .4rem;
             @include transform(translate(-50%, 0));
+            background: rgba(0,0,0,.05);
             span {
               position: absolute;
               bottom: 0;

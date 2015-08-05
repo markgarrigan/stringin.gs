@@ -1,5 +1,6 @@
 @import "bourbon/bourbon";
 @import "neat/neat";
+@import "datedropper/datedropper";
 @import "normalize";
 @import "breakpoints";
 @import "colors";
@@ -19,8 +20,6 @@ body {
 	display: none;
 }
 
-@import "picker/default";
-@import "picker/default_date";
 
 @import "animations";
 @import "app_nav";

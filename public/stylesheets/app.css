@@ -1397,10 +1397,19 @@ form + button {
   color: white;
   border-radius: 50%;
   font-size: 2rem;
-  font-weight: 100; }
+  font-weight: 100;
+  -webkit-transform: translate(0, 0);
+  -moz-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
+  transform: translate(0, 0); }
 
-.moved .create {
-  display: none; }
+.moved span.create {
+  -webkit-transform: translate(110%, 0);
+  -moz-transform: translate(110%, 0);
+  -ms-transform: translate(110%, 0);
+  -o-transform: translate(110%, 0);
+  transform: translate(110%, 0); }
 
 .list p {
   background: white;

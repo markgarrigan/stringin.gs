@@ -28,8 +28,11 @@ form + button {
   border-radius: 50%;
   font-size: 2rem;
   font-weight: 100;
+  @include transform(translate(0, 0));
 }
 
-.moved .create {
-  display: none;
+.moved {
+  span.create {
+    @include transform(translate(110%, 0));
+  }
 }

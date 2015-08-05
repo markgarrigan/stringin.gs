@@ -1247,6 +1247,7 @@ input[type="range"] {
 
 input[type="text"]:not(.range),
 input[type="number"]:not(.range) {
+  -webkit-appearance: none;
   background: transparent;
   border: none;
   outline: none;

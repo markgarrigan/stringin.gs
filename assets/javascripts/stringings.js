@@ -112,7 +112,7 @@
   			content.removeClass('moved');
   			$('.app-nav').removeClass('visible');
   		};
-  		if (!app.touchDisabled() || options.force === true) {
+  		if (app.touch() || options.force === true) {
   			move();
   			return true;
   		}
@@ -222,8 +222,8 @@
   	makeValue : function(options) {
   		options.element.parent().prev('input').val(options.element.text());
   	},
-    touchDisabled : function() {
-  		return $('html').hasClass('no-touch');
+    touch : function() {
+  		return !$('html').hasClass('no-touch');
   	},
     logout : function() {
   		User = false;

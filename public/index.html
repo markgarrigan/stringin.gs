@@ -16,24 +16,24 @@
 <link rel="icon" type="image/png" href="/images/favicon.png">
 <script src="/javascripts/modernizr.custom.js"></script>
 </head>
-<body data-on-load="initHistory" data-initial=".home" id="stringings-app">
+<body data-on-load="initHistory" data-panel=".home" id="stringings-app">
 	<div class="all-container">
 		<div class="app-nav" data-on-mouseenter="moveContent">
-			<a class="home" href="#" data-on-click="showPanel,moveContentBack" data-panel=".stringings" data-key="x">
+			<span class="home" data-on-click="showPanel,moveContentBack" data-panel=".stringings" data-key="x">
 				<img class="mark" src="/images/stringings.png" /> <span><img src="/images/wstringings.png" /></span>
-			</a>
+			</span>
 			<ul>
-				<li><a href="#" data-on-click="showPanel,moveContentBack" data-panel=".stringers" data-key="s"><strong>S</strong><span>tringers</span></a><a class="add" href="#" data-on-click="showPanel,moveContentBack" data-panel=".add-stringer">Add</a></li>
-				<li><a href="#" data-on-click="showPanel,moveContentBack" data-panel=".events" data-key="e"><strong>E</strong><span>vents</span></a><a class="add" href="">Add</a></li>
-				<li><a href="#" data-on-click="showPanel,moveContentBack" data-panel=".strings" data-key="t"><strong>S</strong><span>trings</span></a><a class="add" href="#" data-on-click="showPanel,moveContentBack" data-panel=".add-string">Add</a></li>
-				<li><a href="#" data-on-click="showPanel,moveContentBack" data-panel=".customers" data-key="c"><strong>C</strong><span>ustomers</span></a><a class="add" href="#" data-on-click="showPanel,moveContentBack" data-panel=".add-customer">Add</a></li>
+				<li data-on-click="showPanel,moveContentBack" data-panel=".stringers" data-key="s"><strong>S</strong><span>tringers</span><span class="add" data-on-click="showPanel,moveContentBack" data-panel=".add-stringer">Add</span></li>
+				<li data-on-click="showPanel,moveContentBack" data-panel=".events" data-key="e"><strong>E</strong><span>vents</span><span class="add" data-on-click="showPanel,moveContentBack" data-panel=".add-event">Add</span></li>
+				<li data-on-click="showPanel,moveContentBack" data-panel=".strings" data-key="t"><strong>S</strong><span>trings</span><span class="add" data-on-click="showPanel,moveContentBack" data-panel=".add-string">Add</span></li>
+				<li data-on-click="showPanel,moveContentBack" data-panel=".customers" data-key="c"><strong>C</strong><span>ustomers</span><span class="add" data-on-click="showPanel,moveContentBack" data-panel=".add-customer">Add</span></li>
 			</ul>
 			<h3>Settings</h3>
 			<ul>
-				<li><a href="#" data-on-click="showPanel,moveContentBack" data-panel=".account" data-key="a"><strong>A</strong><span>ccount</span></a></li>
-				<li><a href="#" data-on-click="showPanel,moveContentBack" data-panel=".billing" data-key="b"><strong>B</strong><span>illing</span></a></li>
-				<li><a href="#" data-on-click="logout,moveContentBack"><strong class="no-border">L</strong><span>og Out</span></a></li>
-				<li><a href="#" data-on-click="showPanel,moveContentBack" data-panel=".help" data-key="?"><strong>H</strong><span>elp</span></a></li>
+				<li data-on-click="showPanel,moveContentBack" data-panel=".account" data-key="a"><strong>A</strong><span>ccount</span></li>
+				<li data-on-click="showPanel,moveContentBack" data-panel=".billing" data-key="b"><strong>B</strong><span>illing</span></li>
+				<li data-on-click="logout,moveContentBack"><strong class="no-border">L</strong><span>og Out</span></li>
+				<li data-on-click="showPanel,moveContentBack" data-panel=".help" data-key="?"><strong>H</strong><span>elp</span></li>
 			</ul>
 		</div>
 		<div class="app-content" data-click="moveContentBack" data-on-mouseenter="moveContentBack" data-force="true">

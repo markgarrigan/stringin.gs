@@ -26,6 +26,8 @@
         _.options.baseRef = base;
       };
 
+      // public.baseRef = _.options.app.child(_.options.baseRef);
+
       public.sync = function(callback) {
         _.initClicks();
         _.initDatas(function() {

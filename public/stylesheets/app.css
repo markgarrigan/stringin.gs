@@ -948,32 +948,31 @@ body {
     .app-nav ul li {
       border-bottom: 1px solid #2d2d2d;
       font-size: 1rem;
-      position: relative; }
-      .app-nav ul li a {
-        display: block;
+      position: relative;
+      display: block;
+      font-weight: 100;
+      color: #aaa;
+      padding: 0.6rem 0.8rem;
+      text-decoration: none;
+      -webkit-transition: background 0.1s ease-in-out;
+      -moz-transition: background 0.1s ease-in-out;
+      transition: background 0.1s ease-in-out; }
+      .app-nav ul li strong {
         font-weight: 100;
+        font-size: 1rem;
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        line-height: 28px;
+        border-radius: 50%;
+        border: none;
         color: #aaa;
-        padding: 0.6rem 0.8rem;
-        text-decoration: none;
-        -webkit-transition: background 0.1s ease-in-out;
-        -moz-transition: background 0.1s ease-in-out;
-        transition: background 0.1s ease-in-out; }
-        .app-nav ul li a strong {
-          font-weight: 100;
-          font-size: 1rem;
-          display: inline-block;
-          width: 30px;
-          height: 30px;
-          text-align: center;
-          line-height: 28px;
-          border-radius: 50%;
-          border: none;
-          color: #aaa;
-          margin-left: -3px;
-          -webkit-transition: all 0.2s ease-in-out;
-          -moz-transition: all 0.2s ease-in-out;
-          transition: all 0.2s ease-in-out; }
-        .app-nav ul li a span {
+        margin-left: -3px;
+        -webkit-transition: all 0.2s ease-in-out;
+        -moz-transition: all 0.2s ease-in-out;
+        transition: all 0.2s ease-in-out; }
+        .app-nav ul li strong + span {
           display: inline-block;
           opacity: 1;
           transition-delay: .3s;
@@ -981,9 +980,9 @@ body {
           -moz-transition: opacity 0.1s ease-in-out;
           transition: opacity 0.1s ease-in-out;
           margin-left: -9px; }
-        .app-nav ul li a:active {
-          background: #111; }
-      .app-nav ul li a.add {
+      .app-nav ul li:active {
+        background: #111; }
+      .app-nav ul li span.add {
         position: absolute;
         top: 0;
         right: 0;
@@ -1006,31 +1005,31 @@ body {
       -ms-transform: translate(100%, 0);
       -o-transform: translate(100%, 0);
       transform: translate(100%, 0); }
-    .no-touch .app-nav ul li > a:hover {
+    .no-touch .app-nav ul li:hover {
       background: #111; }
-    .no-touch .app-nav ul li:hover a.add {
-      -webkit-transform: translate(0, 0);
-      -moz-transform: translate(0, 0);
-      -ms-transform: translate(0, 0);
-      -o-transform: translate(0, 0);
-      transform: translate(0, 0); }
+      .no-touch .app-nav ul li:hover span.add {
+        -webkit-transform: translate(0, 0);
+        -moz-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+        -o-transform: translate(0, 0);
+        transform: translate(0, 0); }
     .no-touch .app-nav .home span {
       opacity: 0; }
     .no-touch .app-nav h3 {
       opacity: 0; }
-    .no-touch .app-nav ul li a strong {
+    .no-touch .app-nav ul li strong {
       border: 1px solid #555;
       margin-left: 3px; }
-      .no-touch .app-nav ul li a strong.no-border {
+      .no-touch .app-nav ul li strong.no-border {
         border: none; }
-    .no-touch .app-nav ul li a span {
+    .no-touch .app-nav ul li span {
       opacity: 0; }
     .no-touch .app-nav:hover .home span {
       opacity: 1; }
-    .no-touch .app-nav:hover ul li a strong {
+    .no-touch .app-nav:hover ul li strong {
       border-color: transparent;
       margin-left: -3px; }
-    .no-touch .app-nav:hover ul li a span {
+    .no-touch .app-nav:hover ul li span {
       opacity: 1; }
     .no-touch .app-nav:hover h3 {
       opacity: 1; } }
@@ -1330,7 +1329,8 @@ form {
   right: 0;
   bottom: 3rem;
   overflow-x: hidden;
-  overflow-y: auto; }
+  overflow-y: auto;
+  -webkit-overflow-scrolling: auto; }
   form.no-scroll {
     overflow-y: hidden; }
 

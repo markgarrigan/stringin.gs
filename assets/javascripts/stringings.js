@@ -20,7 +20,7 @@
   				app.checkForAccount(authData).then(function() {
             fire.setBase('users/' + authData.uid);
             fire.sync(function() {
-              app.pushHistory(options);
+              app.showPanel(options);
             });
   				}).fail(function(data) {
   					$('.panel.error.createAccount').addClass('visible').scrollTop(0).find('p').text(data);
@@ -120,16 +120,30 @@
   	showLoading : function() {
   		$('.panel.loading').addClass('visible').scrollTop(0);
   	},
+    panels : [],
   	showPanel : function(options) {
   		if (!User) {
   			$('.panel.visible').removeClass('visible');
   			$('.panel.login').addClass('visible').scrollTop(0);
   		} else {
-  			History.pushState({state:options.panel}, 'Stringin.gs | ' + options.panel, options.panel);
+        var panel = options.panel;
+        app.panels.push(panel);
+        // fire.baseRef.update({pages : app.panels});
+        $('.panel.visible').removeClass('visible');
+    		$panel = $('.panel' + panel);
+        if ($panel.hasClass('checkFirst') && $panel.attr('fire-data') === '') {
+          panel = '.home';
+        }
+    		$('.panel' + panel).addClass('visible').scrollTop(0);
+  			// History.pushState({state:options.panel}, 'Stringin.gs | ' + options.panel, options.panel);
   		}
   	},
   	hidePanel : function(options) {
-  		History.back();
+      app.panels.pop();
+      app.showPanel({
+        panel: app.panels[app.panels.length - 1]
+      });
+  		// History.back();
   	},
     quickSearch : function(options) {
       var items = $(options.results + '.results').children(),
@@ -326,7 +340,7 @@
         'day': day,
         'stringings': 0,
         'percentage':0
-      }
+      };
       day++;
     }
     for(var d=0, b=month.days.length; d<b; d++) {
@@ -381,9 +395,9 @@
 	Mousetrap.bind('esc', function() { app.hidePanel(); });
 
   // Bind to StateChange Event
-  History.Adapter.bind(window,'statechange',function(){ // Note: We are using statechange instead of popstate
-		app.statechange();
-  });
+  // History.Adapter.bind(window,'statechange',function(){ // Note: We are using statechange instead of popstate
+	// 	app.statechange();
+  // });
 
 	$('[data-on-load]').each(function() {
 		var $this = $(this);
@@ -393,29 +407,31 @@
 		Queue(methods,options);
 	});
 
-  $('body').on('mouseenter', '[data-on-mouseenter]', function(e) {
-    var $this = $(this);
-    var data = $this.data();
-    var options = $.extend({el : this, element : $this},data,data.options);
-    var methods = app.methods(data.onMouseenter);
-    Queue(methods,options);
-  });
+  if(!app.touch()) {
+    $('body').on('mouseenter', '[data-on-mouseenter]', function(e) {
+      var $this = $(this);
+      var data = $this.data();
+      var options = $.extend({el : this, element : $this},data,data.options);
+      var methods = app.methods(data.onMouseenter);
+      Queue(methods,options);
+    });
 
-  $('body').on('mouseleave', '[data-on-mouseleave]', function(e) {
-    var $this = $(this);
-    var data = $this.data();
-    var options = $.extend({el : this, element : $this},data,data.options);
-    var methods = app.methods(data.onMouseleave);
-    Queue(methods,options);
-  });
+    $('body').on('mouseleave', '[data-on-mouseleave]', function(e) {
+      var $this = $(this);
+      var data = $this.data();
+      var options = $.extend({el : this, element : $this},data,data.options);
+      var methods = app.methods(data.onMouseleave);
+      Queue(methods,options);
+    });
 
-  $('body').on('mouseover', '[data-on-mouseover]', function(e) {
-    var $this = $(this);
-    var data = $this.data();
-    var options = $.extend({el : this, element : $this},data,data.options);
-    var methods = app.methods(data.onMouseover);
-    Queue(methods,options);
-  });
+    $('body').on('mouseover', '[data-on-mouseover]', function(e) {
+      var $this = $(this);
+      var data = $this.data();
+      var options = $.extend({el : this, element : $this},data,data.options);
+      var methods = app.methods(data.onMouseover);
+      Queue(methods,options);
+    });
+  }
 
   $('body').on('click', '[data-click]', function(e) {
   	var $this = $(this);
